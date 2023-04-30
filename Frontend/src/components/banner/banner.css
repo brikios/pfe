@@ -1,0 +1,25 @@
+.bannerArea{
+    background-image: url("https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: table;
+    width: 100%;
+    
+}
+
+
+
+.bannerTitle{
+    font-weight: 400;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    gap : 20px;
+    font-size: 50px;
+    color: white;
+}
+
+.spanBanner{
+    color: #F7D060;
+    font-weight: 800;
+}
