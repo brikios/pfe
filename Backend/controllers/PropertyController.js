@@ -66,3 +66,15 @@ export const getProperties = async(req,res)=>{
         res.status(500).json(err) 
     }
 }
+
+export const countPropertiesByCity = async(req,res,next)=>{
+    const cities = req.query.cities.split(",")
+    try{
+        const citiesList = await Promise.all(cities.map(city=>{
+            return Property.countDocuments({city:city})
+        }))
+        res.status(200).json(citiesList);
+    }catch(err){
+        next(err)
+    }
+}

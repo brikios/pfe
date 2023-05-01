@@ -1,8 +1,10 @@
 import React from 'react'
 import './featured.css'
-
+import useFetch from './../../hooks/useFetch.js'
 export const Featured = () => {
-  return (
+    const {data,loading,error} = useFetch("property/countByCity?cities=sbeitla,kasserine")
+        console.log(data,loading,error)
+    return (
     <div>
         <div className="featured">
             <div className="featuredItem">

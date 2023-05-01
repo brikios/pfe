@@ -4,7 +4,8 @@ import { createProperty,
         updatedProperty,
         deleteProperty,
         getProperty,
-        getProperties }
+        getProperties,
+        countPropertiesByCity }
     from "../controllers/PropertyController.js";
 import { verifyUser } from "../middlewares/verifyToken.js";
 
@@ -25,4 +26,6 @@ router.get("/get/:id",getProperty)
 //GET ALL PROPERTY
 router.get("/getall",getProperties)
 
+
+router.get("/countByCity",countPropertiesByCity)
 export default router
