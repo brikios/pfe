@@ -1,0 +1,144 @@
+.propertyContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    margin-top: 20px;
+    
+}
+
+.propertyWrapper{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.propertyImageWrapper{
+    width: 33%;
+    
+}
+.propertyImage{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.propertyTitle{
+    font-size: 24px;
+}
+
+.propertyAdress {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.propertySubTitle{
+    color: #98D8AA;
+    font-weight: 500;
+}
+.propertyTitle{
+    font-weight: 700;
+    color: black;
+}
+
+.propertyImages{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.propertyDetails{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.propertyDetailText{
+    flex: 3;
+}
+
+
+.propertyDesc{
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.propertyDetailsPrice{
+    flex: 1;
+    background-color: #98D8AA;
+    padding: 20px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.propertyDetailsPrice>h1{
+    font-size: 18px;
+    color: #555;
+}
+
+.propertyDetailsPrice>span{
+    font-size: 14px;
+    color: #555;
+}
+
+.propertyDetailsPrice>h2{
+    font-weight: 300;
+}
+
+.propertyDetailsPrice>button{
+    border: none;
+    padding: 10px 20px;
+    background-color: #2a8844;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.slider{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.613);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+
+}
+
+.sliderWrapper{
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sliderImg{
+    width: 60%;
+    height: 80vh;
+}
+
+.exit{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    color: rgba(255, 0, 0, 0.733);
+}
+
+.arrow{
+    margin: 20px;
+    font-size: 40px;
+    color: lightgray;
+
+}

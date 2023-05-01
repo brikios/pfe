@@ -14,7 +14,7 @@
 
 .propertiesSearch{
     flex: 1;
-    background-color: #F7D060;
+    border: 1px solid #98D8AA;
     padding: 10px;
     border-radius: 10px;
     position: sticky;
@@ -45,11 +45,15 @@
     height: 30px;
     border: none;
     padding: 5px;
+    color: black;
+    border-bottom: 1px solid ;
 }
 .propertiesSearchItem >input{
     height: 30px;
     border: none;
     padding: 5px;
+    border-bottom: 1px solid ;
+    outline: none;
 }
 
 .propertiesSearchItem >span{

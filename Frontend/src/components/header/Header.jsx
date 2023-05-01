@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.css'
-import { faHouse,faListUl, faLocation, faMoneyBill, faPersonSwimming, faSearch, faTree, faWarehouse } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faHouse,faListUl, faLocation, faMoneyBill, faPersonSwimming, faSearch, faStore, faTree, faWarehouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -25,16 +25,20 @@ export const Header = ({type}) => {
             <span>منازل</span>
             </div>
             <div className="headerListItem">
+            <FontAwesomeIcon icon={faBuilding} />
+            <span>شقق</span>
+            </div>
+            <div className="headerListItem">
             <FontAwesomeIcon icon={faWarehouse} />
-            <span>مستودعات</span>
+            <span>مستودعات</span>    
             </div>
             <div className="headerListItem">
             <FontAwesomeIcon icon={faTree} />
-            <span>أراضي</span>    
+            <span>أراضي</span>            
             </div>
             <div className="headerListItem">
-            <FontAwesomeIcon icon={faPersonSwimming} />
-            <span>مسابح</span>            
+            <FontAwesomeIcon icon={faStore} />
+            <span>محلات تجارية</span>            
             </div>
         </div>
         { type !=='properties' &&

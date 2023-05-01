@@ -1,7 +1,7 @@
 
 .navbar{
     height: 50px;
-    background-color: #F7D060;
+    background-color: #98D8AA;
     display: flex;
     justify-content: center;
 }
@@ -41,7 +41,7 @@
     border-radius: 3px;
     padding: 5px 10px;
     border-bottom: 2px solid #98D8AA;
-    background-color: #F7D060;
+    background-color: #98D8AA;
     color: white;
     line-height: 1.15;
     font-size: 16px;
