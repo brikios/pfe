@@ -87,12 +87,12 @@
     {
        "Délégations":"Kasserine Nord – Kasserine Sud – Azzouhour – Hassi ferid – Sbitla – Sbiba – Jedliane – El Ayoun – Tela – Hidra – Foussana – Feriana – Mejel Bel Abbes.",
        "Nbre":"13",
-       "Gouvernorat":"الڨصرين"
+       "Gouvernorat":"القصرين"
     },
     {
        "Délégations":"Gabès ville – Gabès ouest – Gabès sud – Ghannouch – Metouia – Menzel habib – Hamma – Matmata – Matmata nouvelle – Mareth.",
        "Nbre":"10",
-       "Gouvernorat":"ڨابس"
+       "Gouvernorat":"قابس"
     },
     {
        "Délégations":"Mednine Nord – Mednine Sud – Béni khedach – Ben Guerdene – Zazis – Jerba Houmet Souk – Jerba Midoun – Jerba Ajim – Sidi Makhlouf.",
@@ -102,7 +102,7 @@
     {
        "Délégations":"Gafsa Nord – Sidi Aich – El Ksar – Gafsa Sud – Moulares – Redyef – Métlaoui – El Mdhilla – El Guettar – Belkhir – Sned.",
        "Nbre":"11",
-       "Gouvernorat":"ڨفصة"
+       "Gouvernorat":"قفصة"
     },
     {
        "Délégations":"Tozeur – Degueche – Tameghza – Nefta – Hezoua.",
@@ -117,6 +117,6 @@
     {
        "Délégations":"Kébili Sud – Kébili Nord – Souk El Ahad – Douz nord – Douz sud – El Faouar.",
        "Nbre":"6",
-       "Gouvernorat":"ڨبلي"
+       "Gouvernorat":"قبلي"
     }
  ]

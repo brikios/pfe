@@ -1,23 +1,82 @@
 import React from "react";
 import "./Home.css"
+import "./../../components/card/card.css"
 import { Navbar } from "../../components/navbar/Navbar";
 import { Header } from "../../components/header/Header";
 import { Featured } from "../../components/featured/Featured";
 import PropertyList from "../../components/propertyList/PropertyList";
 import Banner from "../../components/banner/Banner";
+import Card from "../../components/card/Card";
+import { useEffect, useState } from "react";
+import {readInfiniteScrollProperty} from './../../api/Property.js'
+import EndAlert from "../../components/endAlert/EndAlert";
+import InfiniteScroll from "react-infinite-scroll-component"
+//import {infiniteScroll,handleScroll} from "./../../hooks/infiniteScroll";
+import axios from "axios";
+
+const LIMIT = 8;
+
 const Home = () =>{
+    
+    const [properties,setProperties]=useState([]);
+    //const [skip,setSkip]=useState(0);
+    const [totalProperties, setTotalProperties] = useState(0);
+    const [activePage, setActivePage] = useState(1);
+    useEffect(() => {
+		fetchProperties();
+	}, []);
+    const fetchProperties = () => {
+        axios.get('http://localhost:8800/Property/infinite', {
+          params: {
+            page: activePage,
+            size: LIMIT
+          }
+        }).then(({data}) => {
+          setActivePage(activePage+ 1);
+          setProperties([...properties, ...data.records]);
+          setTotalUsers(data.total)
+        }).catch(error => {
+          console.log(error.response);
+        })
+      }
+    
+
+
+    
+    //console.log(properties)
     return(
         <div>
             <Navbar />
             <Header />
-            <div className="homeContainer">
+            <div className="homeContainer" >
                 <Featured />
                 <h1 className="homeTitle">إبحث حسب نوع العقار</h1>
                 <PropertyList />
                 <Banner />
-                <Featured />
-                <PropertyList />
+                <div className="cards-list" >
+                <InfiniteScroll 
+                className="cards-list"
+                    dataLength={properties.length}
+                    next={fetchProperties}
+                    hasMore={true}
+                    endMessage={<EndAlert />}
+                    
+                    
+                >
+                    {properties?.map((Property,index)=>(
+                    <Card
+                    img={Property.images[0]}
+                    rating="5.9"
+                    city={Property.city}
+                    title={Property.title}
+                    price={Property.price} />
+                ))
+                }</InfiniteScroll>
             </div>
+            
+
+            </div>
+            
         </div>
     )
 }

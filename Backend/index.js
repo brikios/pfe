@@ -5,7 +5,12 @@ import authRoute from "./routes/auth.js";
 import propertyRoute from "./routes/property.js";
 import userRoute from "./routes/users.js"
 import cookieParser from "cookie-parser";
+import cors from 'cors'
 const app= express();
+
+
+
+app.use(cors())
 dotenv.config()
 
 const connect = async ()=>{

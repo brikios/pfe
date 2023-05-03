@@ -5,7 +5,10 @@ import { createProperty,
         deleteProperty,
         getProperty,
         getProperties,
-        countPropertiesByCity }
+        countPropertiesByCity,
+        countPropertiesByType,
+        readInfiniteScroll 
+    }
     from "../controllers/PropertyController.js";
 import { verifyUser } from "../middlewares/verifyToken.js";
 
@@ -15,7 +18,7 @@ const router = express.Router();
 router.post("/add",verifyUser,createProperty)
 
 //UPDATE PROPERTY
-router.put("/update/:id",verifyUser,updatedProperty)
+router.put("/update/:id",updatedProperty)
 
 //DELETE PROPERTY
 router.delete("/delete/:id",verifyUser,deleteProperty)
@@ -28,4 +31,8 @@ router.get("/getall",getProperties)
 
 
 router.get("/countByCity",countPropertiesByCity)
+
+router.get("/countBytype",countPropertiesByType)
+
+router.get("/infinite",readInfiniteScroll)
 export default router

@@ -1,14 +1,18 @@
 import React from 'react'
 import './propertylist.css'
+import useFetch from './../../hooks/useFetch.js'
+
 const PropertyList = () => {
+    const {data,loading,error} = useFetch("http://localhost:8800/property/countByType?type=منزل,شقة,أرض,مستودع,محل تجاري")
+    console.log(data)
   return (
     <div className='list'>
-        <div className="listItem">
+        {loading? ("جاري التحميل"):( <><div className="listItem">
             <img src="https://images.pexels.com/photos/7710011/pexels-photo-7710011.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="listImg" />
         
         <div className="listTitles">
             <h1>منزل</h1>
-            <h2>154 منزل</h2>
+            <h2>{data[0]} منزل</h2>
         </div>
         </div>
         <div className="listItem">
@@ -16,7 +20,7 @@ const PropertyList = () => {
         
         <div className="listTitles">
             <h1>شقة</h1>
-            <h2>154 شقة</h2>
+            <h2>{data[1]} شقة</h2>
         </div>
         </div>
         <div className="listItem">
@@ -24,7 +28,7 @@ const PropertyList = () => {
         
         <div className="listTitles">
             <h1>أرض</h1>
-            <h2>154 أرض</h2>
+            <h2>{data[2]} أرض</h2>
         </div>
         </div>
         <div className="listItem">
@@ -32,7 +36,7 @@ const PropertyList = () => {
         
         <div className="listTitles">
             <h1>مستودع</h1>
-            <h2>154 مستودع</h2>
+            <h2>{data[3]} مستودع</h2>
         </div>
         </div>
         <div className="listItem">
@@ -40,9 +44,9 @@ const PropertyList = () => {
         
         <div className="listTitles">
             <h1>محل تجاري</h1>
-            <h2>154 محل تجاري</h2>
+            <h2>{data[4]} محل تجاري</h2>
         </div>
-        </div>
+        </div></>)}
     </div>
   )
 }
