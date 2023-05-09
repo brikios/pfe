@@ -1,0 +1,42 @@
+.container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .container-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+  }
+  .container-form>h1{
+	font-weight: 700;
+	color: #98D8AA;
+	margin-bottom: 15px;
+  }
+  .container-form-email,.container-form-password{
+	height: 30px;
+	padding: 5px;
+	width: 350px;
+	border-radius: 25px;
+	border: 1px solid #98D8AA;
+	outline: none;
+  }
+  
+  .container-form-button {
+	border: none;
+	padding: auto;
+	margin: 15px 20px;
+	background-color: #98D8AA;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 25px;
+	height: 30px;
+  }
+  
+  .container-form-button:disabled{
+	background-color: #98D8AA;
+	cursor: not-allowed;
+  }

@@ -17,7 +17,9 @@ import axios from "axios";
 const LIMIT = 8;
 
 const Home = () =>{
-    
+  useEffect(()=>{
+    document.title='داري - يمكنك الحصول على أفضل العروض على موقعنا'
+},[])
     const [properties,setProperties]=useState([]);
     //const [skip,setSkip]=useState(0);
     const [totalProperties, setTotalProperties] = useState(0);
@@ -25,6 +27,7 @@ const Home = () =>{
     useEffect(() => {
 		fetchProperties();
 	}, []);
+  
     const fetchProperties = () => {
         axios.get('http://localhost:8800/Property/infinite', {
           params: {
@@ -65,8 +68,9 @@ const Home = () =>{
                 >
                     {properties?.map((Property,index)=>(
                     <Card
+                    key={Property.id}
                     img={Property.images[0]}
-                    rating="5.9"
+                    rating={Property.rating}
                     city={Property.city}
                     title={Property.title}
                     price={Property.price} />

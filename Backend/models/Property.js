@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-
+import User from "./User.js";
 
 const PropertySchema = new mongoose.Schema({
     currentOwner:{
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref : 'User',
         required :true
     },
@@ -42,7 +42,7 @@ const PropertySchema = new mongoose.Schema({
     featured:{
         type: Boolean,
         default: false
-    }
-});
+    },
+},{   timestamps : true   });
 
 export default mongoose.model("Property", PropertySchema)

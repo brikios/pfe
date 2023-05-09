@@ -9,11 +9,14 @@ import Proper from '../../../../Data/propTypes.json';
 export const Header = ({type}) => {
   const [destination ,setDestination] = useState('')
   const [propType ,setPropType] = useState('')
-  const [maxPrice ,setMaxPrice] = useState('')
+  const [minPrice ,setMinPrice] = useState(undefined)
+  const [maxPrice ,setMaxPrice] = useState(undefined)
 
   const navigate =useNavigate()
   const handleSearch =()=>{
-    navigate("/properties",{state:{destination,propType,maxPrice}})
+    
+    navigate("/properties",{state:{destination,propType,minPrice,maxPrice}})
+    
   }
 
   return (
@@ -50,8 +53,10 @@ export const Header = ({type}) => {
         <div className="headerSearchItem">
         <FontAwesomeIcon icon={faLocation}  className='headerIcon' />
           <select type='text' 
+          required
                  placeholder='إلي أين أنت ذاهب ؟' 
                  className='headerSearchInput'
+                 
                  onChange={e=>{setDestination(e.target.value)}}
                  ><option selected disabled>إختر المكان</option>
                  {
@@ -68,6 +73,7 @@ export const Header = ({type}) => {
         <div className="headerSearchItem">
         <FontAwesomeIcon icon={faSearch}  className='headerIcon' />
         <select type='text' 
+        required
                  placeholder='إلي أين أنت ذاهب ؟' 
                  className='headerSearchInput'
                  onChange={e=>{setPropType(e.target.value)}}
@@ -85,6 +91,17 @@ export const Header = ({type}) => {
         <div className="headerSearchItem">
         <FontAwesomeIcon icon={faMoneyBill}  className='headerIcon' />
           <input type='number' 
+          required
+                 placeholder='المبلغ الأدنى '
+                 className='headerSearchInput'
+                 onChange={e=>{setMinPrice(e.target.value)}}
+                 />
+          
+        </div>
+        <div className="headerSearchItem">
+        <FontAwesomeIcon icon={faMoneyBill}  className='headerIcon' />
+          <input type='number' 
+          required
                  placeholder='المبلغ الأقصى '
                  className='headerSearchInput'
                  onChange={e=>{setMaxPrice(e.target.value)}}

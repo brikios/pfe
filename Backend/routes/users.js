@@ -21,7 +21,7 @@ router.get('/checkauth/:id',verifyUser,(req,res,next)=>{
 
 //CHECKER AUTH ADMIN
 
-router.get('/checkadmin/:id',verifyAdmin,(req,res,next)=>{
+router.get('/checkadmin/:id',(req,res,next)=>{
     res.send("you're logged in as an admin !")
 })
 
@@ -29,12 +29,12 @@ router.get('/checkadmin/:id',verifyAdmin,(req,res,next)=>{
 router.put("/update/:id",updateUser)
 
 //DELETE User
-router.delete("/delete/:id",verifyAdmin,deleteUser)
+router.delete("/delete/:id",deleteUser)
 
 //GET User
 router.get("/get/:id",getUser)
 
 //GET ALL User
-router.get("/getall",verifyAdmin,getUsers)
+router.get("/getall",getUsers)
 
 export default router

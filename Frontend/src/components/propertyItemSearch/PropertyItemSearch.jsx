@@ -1,28 +1,31 @@
 import React from 'react'
 import './propertyItemSearch.css'
 import './../../components/search/search.css'
-const PropertyItemSearch = () => {
+import { Link } from 'react-router-dom'
+const PropertyItemSearch = ({props}) => {
   return (
     <div className='propertyItem'>
-        <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className='propertyImg'/>
+        <img src={props.images[0]} className='propertyImg'/>
         <div className="propertyDescription">
-            <h1 className="propertyTitle">منزل بنغل بيج على الواجهة الأمامية للمدرسة</h1>
-            <span className="propertySub">منزل مجهز بالتكييف</span>
-            <span className="propertyFeatures">2 بيوت * 1 حمام * 2 سرير</span>
+            <h1 className="propertyTitle">{props.name}</h1>
+            <span className="propertySub">{props.adress}</span>
+            <span className="propertyFeatures">{props.description}</span>
             <span className='CancelPrice'>إلغاء الحجز مجاني</span>
             <span className="propertyCancel">يمكنك إلغاء الحجز لاحقا,لذا عليك بإستغلال هذا السعر</span>
         </div>
         <div className="propertyDetail">
-            <div className="propertyRating">
+           {props.rating && <div className="propertyRating">
                 <span>ممتاز</span>
-                <button>9.1</button>
-            </div>
+                <button>{props.rating}</button>
+            </div>}
             <div className="propertyDetailsText">
                 <span className="propertyPrice">
-                    455DT
+                    {props.price}دت
                 </span>
                 <span className="propertyTaxes">يشمل الضرائب والرسوم</span>
+                <Link to={`http://localhost:5173/property/${props._id}`}>
                 <button className='propertyCheckButton'>مزيد من المعلومات</button>
+                </Link>
             </div>
         </div>
     </div>

@@ -13,8 +13,8 @@ export default function Card (props){
             <img src={props.img} className="card--image" />
             <div className="card--stats">
                 <img src="https://freepngimg.com/thumb/star/22-star-png-image.png" className="card--star" />
-                <span> {props.rating}</span>
-                <span className="gray"> • (99)  </span>
+                <span> {props.rating} </span>
+                <span className="gray">| | (99)  </span>
                 <span className="gray">{props.city}</span>
             </div>
             <p className="card--title">{props.title}</p>

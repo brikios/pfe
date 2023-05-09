@@ -59,8 +59,14 @@ export const getFeaturedProperty = async(req,res,next)=>{
 //GET ALL PROPERTY
 
 export const getProperties = async(req,res)=>{
+    const {min,max,...others} = req.body;
+    //const city = req.query.city
     try{
-        const getAllProperty = await Property.find();
+        const getAllProperty = await Property.find({
+            city:req.query.city,
+            type:req.query.type,
+            price:{ $gte: req.query.min || 1, $lte: req.query.max || 999 }
+          });
         res.status(200).json(getAllProperty);
     }catch(err){
         res.status(500).json(err) 

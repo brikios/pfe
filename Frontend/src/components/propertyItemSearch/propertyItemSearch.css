@@ -33,7 +33,13 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
+    border-radius: 4px;
 }
+
+.propertyImg:hover{
+    opacity: 0.5;
+}
+
 
 .propertyDescription{
     display: flex;
