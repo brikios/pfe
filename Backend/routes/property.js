@@ -15,13 +15,13 @@ import { verifyUser } from "../middlewares/verifyToken.js";
 const router = express.Router();
 
 //ADD PROPERTY
-router.post("/add",verifyUser,createProperty)
+router.post("/add",createProperty)
 
 //UPDATE PROPERTY
 router.put("/update/:id",updatedProperty)
 
 //DELETE PROPERTY
-router.delete("/delete/:id",verifyUser,deleteProperty)
+router.delete("/delete/:id",deleteProperty)
 
 //GET PROPERTY
 router.get("/get/:id",getProperty)

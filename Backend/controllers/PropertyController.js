@@ -1,5 +1,4 @@
 import Property from "../models/Property.js";
-
 //ADD PROPERTY
 
 export const createProperty = async (req,res)=>{

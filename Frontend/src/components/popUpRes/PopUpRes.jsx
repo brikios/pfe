@@ -2,7 +2,7 @@ import { faCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useState } from 'react'
-import { createContract } from '../../../../Backend/controllers/ContractContoller'
+import { addContract } from '../../../../Backend/controllers/DemandController'
 
 const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
   const [startDate, setStartDate] = useState("");
@@ -11,7 +11,7 @@ const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
     event.preventDefault();
 
     try {
-      const response = await createContract({
+      const response = await addContract({
         property: propertyId,
         startDate,
         endDate,

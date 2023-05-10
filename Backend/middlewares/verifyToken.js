@@ -4,6 +4,7 @@ import { createError } from "./errorHandler.js";
 
 export const verifyToken = (req,res,next)=>{
     const token = req.cookies.access_token;
+
      if(!token)     return next(createError(401,"you're not authenticated !"))
      
 jwt.verify(token,process.env.JWT_SEC,(error,user)=>{
@@ -34,3 +35,18 @@ export const verifyAdmin = (req,res,next)=>{
         }
     })
 }
+
+
+export const verifyTokenContract = (req, res, next) => {
+    const tokenDec = req.cookies.access_token;
+    if (!tokenDec) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    try {
+      const decoded = jwt.verify(tokenDec, process.env.JWT_SEC);
+      req.user = decoded;
+      next();
+    } catch (err) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+  };
