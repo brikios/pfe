@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "nodemon": "^2.0.22",
-    "safe-buffer": "^5.2.1"
+    "safe-buffer": "^5.2.1",
+    "universal-cookie": "^4.0.4"
   }
 }

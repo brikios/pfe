@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt  from "jsonwebtoken";
 import { createError } from "../middlewares/errorHandler.js";
+import Cookies from 'universal-cookie';
 
 //REGISTRE USER
 export const registreUser = async (req,res,next)=>{
@@ -40,7 +41,19 @@ export const loginUser = async (req,res,next)=>{
         },
         process.env.JWT_SEC, { expiresIn: '3h' })
         const {password, isAdmin, ...otherDetails} = user._doc; 
-        res.cookie("access_token",token,{httpOnly:true}).status(200).json(user)
+        const userWithToken = {
+            token,
+            user: {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                isAdmin: user.isAdmin
+            }
+        }
+        res.cookie("access_token",token,{httpOnly:true, sameSite: "strict"}).status(200).json(userWithToken)
+        
     }catch(error){
         throw error;
     }

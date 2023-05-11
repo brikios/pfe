@@ -4,6 +4,7 @@ import Properties from './pages/properties/Properties.jsx'
 import Property from './pages/property/Property.jsx'
 import './App.css'
 import Login from './pages/login/Login.jsx'
+import Logout from './pages/logout/Logout.jsx'
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
         <Route path='/properties' element={<Properties />} />
         <Route path='/property' element={<Property />} />
         <Route path='/property/:id' element={<Property />} />
+        <Route path='logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   )

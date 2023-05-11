@@ -25,13 +25,17 @@ const Login = () => {
             const res = await axios.post("http://localhost:8800/auth/login",credentials)
             dispatch({type:"LOGIN_SUCCESS", payload:res.data})
             navigate('/')
-            const EXPIRE_TIME = 1000*60;
-                sessionStorage.setItem('expireTime', JSON.stringify({
+            const EXPIRE_TIME = 1000*60*60;
+            //const token = res.data.token;
+            
+            //Cookies.set('access_token',res.data._id,{ expires: new Date(Date.now() + EXPIRE_TIME) })
+           // localStorage.setItem('token',res.data.token);
+            localStorage.setItem('expireTime', JSON.stringify({
                 time: new Date(),
                     }))
                     setTimeout(function() {
-                        sessionStorage.removeItem('expireTime');
-                        sessionStorage.removeItem('user')
+                        localStorage.removeItem('expireTime');
+                        localStorage.removeItem('user')
                     }, EXPIRE_TIME);
         }catch(err){
             dispatch({type:"LOGIN_FAILURE",payloud:err.response.data})

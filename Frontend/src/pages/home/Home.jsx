@@ -13,6 +13,10 @@ import EndAlert from "../../components/endAlert/EndAlert";
 import InfiniteScroll from "react-infinite-scroll-component"
 //import {infiniteScroll,handleScroll} from "./../../hooks/infiniteScroll";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import property from "../property/Property";
+import { Link } from 'react-router-dom'
+
 
 const LIMIT = 8;
 
@@ -20,6 +24,7 @@ const Home = () =>{
   useEffect(()=>{
     document.title='داري - يمكنك الحصول على أفضل العروض على موقعنا'
 },[])
+    const navigate=useNavigate();
     const [properties,setProperties]=useState([]);
     //const [skip,setSkip]=useState(0);
     const [totalProperties, setTotalProperties] = useState(0);
@@ -27,7 +32,9 @@ const Home = () =>{
     useEffect(() => {
 		fetchProperties();
 	}, []);
-  
+  const handleNavigate=(propId)=>{
+    navigate(`property/${propId}`)
+  }
     const fetchProperties = () => {
         axios.get('http://localhost:8800/Property/infinite', {
           params: {
@@ -67,13 +74,20 @@ const Home = () =>{
                     
                 >
                     {properties?.map((Property,index)=>(
+                     
+                    <a onClick={()=>handleNavigate(Property._id)} >  
+                                      
                     <Card
-                    key={Property.id}
-                    img={Property.images[0]}
-                    rating={Property.rating}
-                    city={Property.city}
-                    title={Property.title}
-                    price={Property.price} />
+                      key={Property.id}
+                      img={Property.images[0]}
+                      rating={Property.rating}
+                      city={Property.city}
+                      title={Property.title}
+                      price={Property.price} 
+                     />
+                     
+                     </a> 
+                     
                 ))
                 }</InfiniteScroll>
             </div>

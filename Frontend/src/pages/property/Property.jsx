@@ -38,7 +38,8 @@ const property = () =>{
             setSlideNumber(newSlideNumber)
     }
     useEffect(()=>{
-        document.title=`${data.title}`
+        document.title=`${data.name}`
+        
     },[])
 
     const handleUserState=()=>{
@@ -47,7 +48,9 @@ const property = () =>{
     return(
         <div>
             <Navbar />
-            
+            {useEffect(()=>{
+        document.title=`${data.adress}`
+    },[])}
             <Header type="properties"/>
             {loading?("loading") : (
             <div className="propertyContainer">
