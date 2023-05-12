@@ -23,13 +23,9 @@ const Login = () => {
         dispatch({type:"LOGIN_START"})
         try{
             const res = await axios.post("http://localhost:8800/auth/login",credentials)
-            dispatch({type:"LOGIN_SUCCESS", payload:res.data})
+            dispatch({type:"LOGIN_SUCCESS",payload:res.data})
             navigate('/')
             const EXPIRE_TIME = 1000*60*60;
-            //const token = res.data.token;
-            
-            //Cookies.set('access_token',res.data._id,{ expires: new Date(Date.now() + EXPIRE_TIME) })
-           // localStorage.setItem('token',res.data.token);
             localStorage.setItem('expireTime', JSON.stringify({
                 time: new Date(),
                     }))

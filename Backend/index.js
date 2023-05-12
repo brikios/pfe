@@ -7,6 +7,7 @@ import userRoute from "./routes/users.js"
 import contractRoute from "./routes/contract.js"
 import cookieParser from "cookie-parser";
 import cors from 'cors'
+import { verifyTokenContract } from "./middlewares/verifyToken.js";
 const app= express();
 
 
@@ -28,7 +29,7 @@ app.use(express.json())
 app.use("/auth", authRoute)
 app.use("/property", propertyRoute)
 app.use("/users", userRoute)
-app.use("/contract",contractRoute)
+app.use("/contract",verifyTokenContract,contractRoute)
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })

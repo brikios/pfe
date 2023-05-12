@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import Cookies from 'js-cookie';
+import axios from "axios";
 
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -18,7 +19,9 @@ const AuthReducer = (state, action) => {
         error: null,
       };
     case "LOGIN_SUCCESS":
+      const token = action.payload.token;
       Cookies.set('access_token', action.payload.token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       return {
         user: action.payload,
         loading: false,
@@ -45,7 +48,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state.user));
+    Cookies.set("user", JSON.stringify(state.user));
   }, [state.user]);
 
   return (

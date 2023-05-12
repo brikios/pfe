@@ -22,7 +22,7 @@ const contractSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required:true
   },
   price: {
     type: Number,

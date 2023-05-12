@@ -2,12 +2,12 @@ import jwt  from "jsonwebtoken";
 import { createError } from "./errorHandler.js";
 
 
+
 export const verifyToken = (req,res,next)=>{
     const token = req.cookies.access_token;
-
-     if(!token)     return next(createError(401,"you're not authenticated !"))
+     if(!token) return next(createError(401,"you're not authenticated !"))
      
-jwt.verify(token,process.env.JWT_SEC,(error,user)=>{
+    jwt.verify(token,process.env.JWT_SEC,(error,user)=>{
     if(error)
     return next(createError(405,"Token not valid !"))
     req.user = user 
@@ -38,7 +38,8 @@ export const verifyAdmin = (req,res,next)=>{
 
 
 export const verifyTokenContract = (req, res, next) => {
-    const tokenDec = req.cookies.access_token;
+    const authHeader = req.headers['authorization'];
+    const tokenDec = authHeader && authHeader.split(' ')[1];
     if (!tokenDec) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
@@ -49,4 +50,4 @@ export const verifyTokenContract = (req, res, next) => {
     } catch (err) {
       return res.status(401).json({ message: 'Invalid token' });
     }
-  };
+};

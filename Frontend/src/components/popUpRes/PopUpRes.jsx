@@ -12,25 +12,14 @@ const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
   const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
   const handleSubmit = async (event) => {
     event.preventDefault();
-    /*
-    try {
-      const response = await addContract({
-        propertyId: data?._id,
-        startDate:startDate,
-        endDate:endDate,
-      });
-
-      console.log(response.data); // 
-    } catch (error) {
-      console.error(error);
-    }*/
+    
     try{
     axios.post('http://localhost:8800/contract/addContract',{
       propertyId: propertyId,
       startDate:startDate,
       endDate:endDate,
     })
-    console.log(response.data);;
+    //console.log(response.data);;
   }catch(error){
     console.log(error)
   }

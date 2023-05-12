@@ -43,7 +43,7 @@ const property = () =>{
     },[])
 
     const handleUserState=()=>{
-        (user) ? setOpenPopUp(true) : navigate('/Login')   
+       (user) ? setOpenPopUp(true) : navigate('/login') 
     }
     return(
         <div>
