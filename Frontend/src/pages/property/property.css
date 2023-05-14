@@ -75,6 +75,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-height: 180px;
+    border-radius: 4px;
 }
 
 .propertyDetailsPrice>h1{
@@ -141,4 +143,8 @@
     font-size: 40px;
     color: lightgray;
 
+}
+
+.profile{
+    
 }

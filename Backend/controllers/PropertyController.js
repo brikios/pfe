@@ -11,6 +11,15 @@ export const createProperty = async (req,res)=>{
     }
 }
 
+//GET PROPERTY OWNER
+export const getPropertyByOwner = async (req,res)=>{
+    try{
+        const getProperty = await Property.find({currentOwner : req.params.id});
+        res.status(200).json(getProperty);
+    }catch(err){
+        res.status(500).json(err) 
+    }
+}
 
 //UPDATE PROPERTY
 

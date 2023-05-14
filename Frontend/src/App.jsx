@@ -21,7 +21,7 @@ function App() {
         <Route path='/property' element={<Property />} />
         <Route path='/property/:id' element={<Property />} />
         <Route path='logout' element={<Logout />} />
-        <Route path='/account' element={<Account />} />
+        <Route path='/account/:id' element={<Account />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>

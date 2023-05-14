@@ -7,7 +7,8 @@ import { createProperty,
         getProperties,
         countPropertiesByCity,
         countPropertiesByType,
-        readInfiniteScroll 
+        readInfiniteScroll, 
+        getPropertyByOwner
     }
     from "../controllers/PropertyController.js";
 import { verifyUser } from "../middlewares/verifyToken.js";
@@ -26,6 +27,8 @@ router.delete("/delete/:id",deleteProperty)
 //GET PROPERTY
 router.get("/get/:id",getProperty)
 
+//GET PROPERTY BY OWNER 
+router.get('/getByOwner/:id',getPropertyByOwner)
 //GET ALL PROPERTY
 router.get("/getall",getProperties)
 

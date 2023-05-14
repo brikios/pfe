@@ -1,15 +1,16 @@
 import React from 'react'
 import './propertyItemSearch.css'
 import './../../components/search/search.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const PropertyItemSearch = ({props}) => {
+    const navigate=useNavigate()
   return (
     <div className='propertyItem'>
         <img src={props.images[0]} className='propertyImg'/>
         <div className="propertyDescription">
             <h1 className="propertyTitle">{props.name}</h1>
             <span className="propertySub">{props.adress}</span>
-            <span className="propertyFeatures">{props.description}</span>
+            <span className="propertyFeatures">{props.description.substring(0,250)}<Link to={`http://localhost:5173/property/${props._id}`}>....See more</Link></span>
             <span className='CancelPrice'>إلغاء الحجز مجاني</span>
             <span className="propertyCancel">يمكنك إلغاء الحجز لاحقا,لذا عليك بإستغلال هذا السعر</span>
         </div>

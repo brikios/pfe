@@ -83,7 +83,9 @@
     position: absolute;
     z-index: 1;
   }
-  
+  .link{
+    cursor: pointer;
+  }
   .dropdown:hover .dropdown-content {
     display: block;
   }

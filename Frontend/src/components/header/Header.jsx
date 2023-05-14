@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Header.css'
 import { faBuilding, faHouse,faListUl, faLocation, faMoneyBill, faPersonSwimming, faSearch, faStore, faTree, faWarehouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Records  from '../../../../Data/gov.json';
 import Proper from '../../../../Data/propTypes.json';
+import { AuthContext } from '../../context/AuthContext';
 export const Header = ({type}) => {
   const [destination ,setDestination] = useState('')
   const [propType ,setPropType] = useState('')
@@ -18,7 +19,8 @@ export const Header = ({type}) => {
     navigate("/properties",{state:{destination,propType,minPrice,maxPrice}})
     
   }
-
+  
+  
   return (
     <div className='header'>
       <div className={type =='properties' ? 'headerContainer propertiesMode':'headerContainer'} >
@@ -48,7 +50,7 @@ export const Header = ({type}) => {
           <>
         <h1 className="headerTitle">نقدم لك أحسن العروض لإستئجار مرفق جيد</h1>
         <p className="headerDescription">أحصل على أحسن الأسعار لقضاء عطلة سعيدة أو لإستئجار مرفق لعملك الجديد معنا على موقعنا </p>
-        <button className="headerButton"> إشترك أو سجل الدخول</button>
+            
         <div className="headerSearch">
         <div className="headerSearchItem">
         <FontAwesomeIcon icon={faLocation}  className='headerIcon' />

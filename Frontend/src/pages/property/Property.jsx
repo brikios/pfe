@@ -10,6 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 import PopUpRes from "../../components/popUpRes/PopUpRes";
+import Profile from "../../components/profile/Profile";
+import useFetch2 from "../../hooks/useFetch2";
 const property = () =>{
     const location= useLocation();
     const navigate=useNavigate();
@@ -23,8 +25,12 @@ const property = () =>{
         setOpenImg(true);   
     }
     const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
+    const {data2,load,err,ref} = useFetch2(`http://localhost:8800/users/get/${data.currentOwner}`)
     const {user}=useContext(AuthContext);
-    
+    useEffect(()=>{
+        document.title=`${data.title}`
+        
+    })
     const handleImgChange= (direction)=>{
             let newSlideNumber;
 
@@ -37,13 +43,13 @@ const property = () =>{
             }
             setSlideNumber(newSlideNumber)
     }
-    useEffect(()=>{
-        document.title=`${data.name}`
-        
-    },[])
+    
 
     const handleUserState=()=>{
        (user) ? setOpenPopUp(true) : navigate('/login') 
+    }
+    const handleNavigate=(path)=>{
+        navigate(`/account/${path}`)
     }
     return(
         <div>
@@ -76,11 +82,13 @@ const property = () =>{
                                 <img src={img} onClick={()=>handleOpenImg(index)} alt="" className="propertyImage" />
                             </div>
                         ))}
+                        
                     </div>
                     <div className="propertyDetails">
                         <div className="propertyDetailText">
                             <h1 className="propertyDescTitle">{data.title}</h1>
                             <p className="propertyDesc">{data.description}</p>
+                            
                         </div>
                         <div className="propertyDetailsPrice">
                             <h1>للكراء بالشهر أو بالأسبوع</h1>
@@ -88,10 +96,22 @@ const property = () =>{
                             <h2><b>{data.price} دت</b> الشهر</h2>
                             <button onClick={handleUserState}>احجز الآن</button>
                         </div>
+                        
                     </div>
+                    <div >
+                        <a onClick={()=>handleNavigate(data2._id)}>
+                        <Profile 
+                    key={data2.id}
+                    img={data2.img}
+                    firstName={data2.firstName}
+                    lastName={data2.lastName}
+                    phone={data2.phone}
+                    email={data2.email}
+                    /></a></div>
                 </div>
             </div>)}
             {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} propertyId={propertyId} currentUser={currentUser}/>}
+            
         </div>
     )
 }

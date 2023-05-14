@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
@@ -8,7 +8,7 @@ export const Navbar = () => {
     navigate(path)
   }
   const{user}=useContext(AuthContext)
-
+  
   return (
     <div className='navbar'>
         <div className="navContainer">
@@ -16,10 +16,10 @@ export const Navbar = () => {
            {user ? (<><div className="dropdown">
             <img className='profile-photo' src={user.img} alt="" />
                           
-                          <div class="dropdown-content">
-                            <a onClick={()=>handleNavigate('/account')}>حسابي</a>
-                            <a onClick={()=>handleNavigate('/logout')}>خروج</a>
-                            <a>{user.email}</a>
+                          <div className="dropdown-content">
+                            <a className='link' onClick={()=>handleNavigate(`/account/${user._id}`)}>حسابي</a>
+                            <a className='link' onClick={()=>handleNavigate('/logout')}>خروج</a>
+                            
                           </div>
                         </div>
                         </>)  
