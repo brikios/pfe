@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-
+import jwt from 'jsonwebtoken';
 //UPDATE User
 
 export const updateUser = async(req,res)=>{
@@ -43,3 +43,27 @@ export const getUsers = async(req,res)=>{
         res.status(500).json(err) 
     }
 }
+
+/*
+export const getConnectUser = async (req,res)=>{
+    try {
+        const user = await User.findById(req.user._id);
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+      }
+}
+
+export const getConnectUser =async (req,res) => {
+    try {
+        const {_id,email} = await User.findById("645a4f9accc067c89250211f");
+        res.json({_id,email});
+      console.log(email)
+    } catch(err) {
+      res.json(err);
+    }
+  };*/

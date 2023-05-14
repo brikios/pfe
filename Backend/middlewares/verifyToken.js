@@ -51,3 +51,22 @@ export const verifyTokenContract = (req, res, next) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
 };
+
+export const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+  
+    if (!authHeader) {
+      return res.status(401).json({ message: 'Authorization header missing' });
+    }
+  
+    const token = authHeader.split(' ')[1];
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SEC);
+      req.user = decoded.user;
+      next();
+    } catch (err) {
+      console.error(err);
+      res.status(401).json({ message: 'Invalid token' });
+    }
+  };

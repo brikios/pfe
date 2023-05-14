@@ -54,7 +54,7 @@ export const loginUser = async (req,res,next)=>{
                 process.env.JWT_SEC
             )
             res.cookie("access_token", token);
-            return res.json({ status: 'ok', token: token})
+            return res.json({ status: 'ok', token: token,user:user})
         } else {
             return res.json({ status: 'error', token: false })
         }

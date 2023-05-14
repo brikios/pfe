@@ -3,9 +3,10 @@ import {
     updateUser,
     deleteUser,
     getUser,
-    getUsers }
+    getUsers, 
+    getConnectUser}
 from "../controllers/UserController.js";
-import { verifyUser,verifyAdmin,verifyToken } from "../middlewares/verifyToken.js";
+import { verifyUser,verifyAdmin,verifyToken, authMiddleware, verifyTokenContract } from "../middlewares/verifyToken.js";
 const router = express.Router();
 
 
@@ -37,4 +38,6 @@ router.get("/get/:id",getUser)
 //GET ALL User
 router.get("/getall",getUsers)
 
+//GET CONNECT USER
+router.get('/getconnectuser',verifyTokenContract,getConnectUser)
 export default router
