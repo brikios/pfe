@@ -5,6 +5,8 @@ import authRoute from "./routes/auth.js";
 import propertyRoute from "./routes/property.js";
 import userRoute from "./routes/users.js"
 import contractRoute from "./routes/contract.js"
+import conversationRoute from "./routes/conversation.js"
+import messageRoute from "./routes/message.js"
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import { verifyTokenContract } from "./middlewares/verifyToken.js";
@@ -30,6 +32,8 @@ app.use("/auth", authRoute)
 app.use("/property", propertyRoute)
 app.use("/users", userRoute)
 app.use("/contract",verifyTokenContract,contractRoute)
+app.use("/conversation",conversationRoute)
+app.use("/message",messageRoute)
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })

@@ -101,3 +101,13 @@
     background-color: #f2f2f2;
   }
   
+  .mesNotif{
+    margin-right: 700px;
+  }
+
+  .ico{
+    padding: 5px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }

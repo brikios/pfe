@@ -1,4 +1,6 @@
-import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import { BrowserRouter,Routes,Route,Navigate } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom';
+
 import Home from './pages/home/Home.jsx'
 import Properties from './pages/properties/Properties.jsx'
 import Property from './pages/property/Property.jsx'
@@ -6,22 +8,25 @@ import './App.css'
 import Login from './pages/login/Login.jsx'
 import Logout from './pages/logout/Logout.jsx'
 import Account from './pages/account/Account.jsx'
-import { AuthContextProvider } from './context/AuthContext.jsx'
+import Messages from './pages/messages/Messages.jsx'
+import { AuthContext, AuthContextProvider } from './context/AuthContext.jsx'
+import { useContext } from 'react'
 
 function App() {
-  
+  const {user} = useContext(AuthContext)
 
   return (
     <BrowserRouter>
     <AuthContextProvider>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/Login' element={<Login />} />
+        <Route path='login' element={user ?  <Navigate to='/' /> : <Login />}  /> 
         <Route path='/properties' element={<Properties />} />
         <Route path='/property' element={<Property />} />
         <Route path='/property/:id' element={<Property />} />
         <Route path='logout' element={<Logout />} />
         <Route path='/account/:id' element={<Account />} />
+        <Route path='/messages' element={!user ?  <Navigate to='/' /> : <Messages />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>

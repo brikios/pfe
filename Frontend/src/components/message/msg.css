@@ -1,0 +1,34 @@
+.msg{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.msgImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+}
+.msgText{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #98D8AA;
+    color: white;
+}
+.msgTop{
+    display: flex;
+}
+.msgBottom{
+    font-size: 12px;
+    margin-top: 10px;
+}
+.msg.mine{
+    align-items: flex-end;
+}
+
+.msg.mine .msgText{
+    background-color: rgb(247, 244, 244);
+    color:#4b4b4b ;
+}

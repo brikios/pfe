@@ -1,0 +1,27 @@
+.conv{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.convImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: contain;
+    margin-left: 20px;
+}
+
+.convName{
+    font-weight: 500;
+    color: 	#36454F;
+}
+
+.conv:hover{
+    background-color: #f2f5f7;
+    width: 75%;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
