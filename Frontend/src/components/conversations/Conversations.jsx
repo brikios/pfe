@@ -8,12 +8,12 @@ const Conversations = ({conversation,currentUser}) => {
 
   useEffect(()=>{
           const receiver = conversation.members.find((m)=>m !== currentUser._id)
-          console.log(currentUser)
+          //console.log(currentUser)
           const getUser= async ()=>{
             try{
             const res = await axios(`http://localhost:8800/users/get/${receiver}`)
             setUser(res.data)
-            console.log(res.data)
+            //console.log(res.data)
             
           }catch(err){
             console.log(err)
@@ -21,10 +21,12 @@ const Conversations = ({conversation,currentUser}) => {
           }
           getUser()
         },[currentUser,conversation])
+
+  
   return (
     <div className='conv'>
-        <img src={user.img} alt="" className="convImg" />
-        <span className="convName">{user.firstName}</span>
+        <img src={user?.img} alt="" className="convImg" />
+        <span className="convName">{user?.firstName}</span>
     </div>
   )
 }

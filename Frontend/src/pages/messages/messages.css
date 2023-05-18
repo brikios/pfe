@@ -7,6 +7,7 @@
 }
 
 .chatBox{
+    position: relative;
     flex: 5.5;
 }
 
@@ -66,4 +67,11 @@
     color: white;
     background-color: #98D8AA;
     margin-left: 50px;
+}
+
+.noChat{
+    position: absolute;
+    top :20%;
+    font-style: 50px;
+    color : rgb(167, 167, 167)
 }

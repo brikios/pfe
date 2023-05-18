@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './msg.css'
-const Msg = ({mine}) => {
+import {format} from 'timeago.js'
+const Msg = ({msg,mine}) => {
+  
   return (
     <div className={mine ? "msg mine":"msg"}>
         <div className="msgTop">
@@ -9,10 +11,10 @@ const Msg = ({mine}) => {
                 alt="" 
                 className='msgImg'
             />
-            <p className='msgText'>السلام عليكم و رحمت الله و بركاته السلام عليكم و رحمت الله و بركاته</p>
+            <p className='msgText'>{msg.text}</p>
         </div>
         <div className="msgBottom">
-            1 hour ago
+            {format(msg.createdAt)}
         </div>
     </div>
   )
