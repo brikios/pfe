@@ -27,3 +27,62 @@ h2{
     font-weight: 300;
     font-size: 14px;
 }
+
+.fpo {
+    position: relative;
+    height: 165px;
+    margin: 25% auto;
+    display: block;
+}
+.pulsate{
+  background: linear-gradient(-45deg, #DDDDDD, #F0F0F0, #DDDDDD, #F0F0F0);
+	background-size: 200% 200%;
+	-webkit-animation: Gradient 2.25s ease infinite;
+	-moz-animation: Gradient 2.25s ease infinite;
+	animation: Gradient 2.25s ease infinite;
+}
+.block {
+  display:block;
+  width:271px;
+  height:16px;
+  color:#000;
+}
+.block2 {
+  width:78px;
+  height:8px;
+  margin-bottom:8px;
+}
+.block3 {
+  width:131px;
+  height:8px;
+  margin-bottom:16px;
+}
+.circle {
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  float:right;
+  
+}
+#card {
+  box-sizing: border-box;
+	width: 150px;
+  background: #fff;
+	position: relative;
+	margin:auto;
+	top:25%;
+}
+.card-image {
+  box-sizing: border-box;
+  display:block;
+  width:335px;
+  height:243px;
+  background:#FAFAFA;
+  padding:16px;
+}
+.card-content {
+  clear:both;
+  box-sizing: border-box;
+  padding:16px;
+  background:#fff;
+}

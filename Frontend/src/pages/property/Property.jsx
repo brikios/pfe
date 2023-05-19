@@ -51,6 +51,8 @@ const property = () =>{
     const handleNavigate=(path)=>{
         navigate(`/account/${path}`)
     }
+    const sameUser = data.currentOwner==user._id ?true :false
+
     return(
         <div>
             <Navbar />
@@ -90,16 +92,18 @@ const property = () =>{
                             <p className="propertyDesc">{data.description}</p>
                             
                         </div>
-                        <div className="propertyDetailsPrice">
+                        {sameUser ?(<>
+                            <button class="button-56" role="button">تعديل</button></>)
+                            :<div className="propertyDetailsPrice">
                             <h1>للكراء بالشهر أو بالأسبوع</h1>
                             <span>تريد ليلة نوم هانئة؟ حازت هذه المنشأة على تقييم عالٍ لما تتمتع به من مميزات مريحة للغاية.</span>
                             <h2><b>{data.price} دت</b> الشهر</h2>
                             <button onClick={handleUserState}>احجز الآن</button>
-                        </div>
+                        </div>}
+                        
                         
                     </div>
-                    <div >
-                        <a onClick={()=>handleNavigate(data2._id)}>
+                    {sameUser ?<></>:<><a onClick={()=>handleNavigate(data2._id)}>
                         <Profile 
                     key={data2.id}
                     img={data2.img}
@@ -107,7 +111,8 @@ const property = () =>{
                     lastName={data2.lastName}
                     phone={data2.phone}
                     email={data2.email}
-                    /></a></div>
+                    /></a></>}<div >
+                        </div>
                 </div>
             </div>)}
             {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} propertyId={propertyId} currentUser={currentUser}/>}

@@ -70,3 +70,75 @@
   .profile .stats div p:first-child::before {
     content: "";
   }
+
+
+  .btnAdd {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: Helvetica,"sans-serif";
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: #98D8AA;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .btnAdd:hover {
+    background: #98D8AA;
+  }
+  
+  .btnAdd > svg {
+    width: 34px;
+    margin-right: 10px;
+    transition: transform .3s ease-in-out;
+  }
+  
+  .btnAdd:hover svg {
+    transform: translateX(-5px);
+  }
+  
+  .btnAdd:active {
+    transform: scale(0.95);
+  }
+
+
+  .btnSet {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: Helvetica,"sans-serif";
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: gray;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: white;
+  }
+  
+  .btnSet:hover {
+    background: gray;
+  }
+  
+  .btnSet > svg {
+    width: 34px;
+    margin-right: 10px;
+    transition: transform .3s ease-in-out;
+  }
+  
+  .btnSet:hover svg {
+    transform: translateX(-5px);
+  }
+  
+  .btnSet:active {
+    transform: scale(0.95);
+  }
+
+  
+  
