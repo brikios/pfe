@@ -24,4 +24,4 @@ const ReviewSchema = new mongoose.Schema({
   },
 },{   timestamps : true   });
 
-export default mongoose.Schema("Review",ReviewSchema)
+export default mongoose.model("Review",ReviewSchema)

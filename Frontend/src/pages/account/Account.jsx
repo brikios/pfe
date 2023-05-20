@@ -20,15 +20,14 @@ const Account = () => {
         const {data2,load,err,ref} = useFetch2(`http://localhost:8800/property/getByOwner/${userId}`)
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
         
-       //console.log(userId)
-        //console.log(data)
-        //console.log(data2)
+       
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
         })
-      
-        const sameUser = userId==user._id ?true :false
-      
+        let sameUser=false
+      if(user){
+        sameUser = userId==user._id && user ?true :false
+      }
   return (
     <div>
         <Navbar />

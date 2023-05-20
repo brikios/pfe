@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import PopUpRes from "../../components/popUpRes/PopUpRes";
 import Profile from "../../components/profile/Profile";
 import useFetch2 from "../../hooks/useFetch2";
+import PopUpReview from "../../components/popUpReview/PopUpReview";
 const property = () =>{
     const location= useLocation();
     const navigate=useNavigate();
@@ -20,6 +21,7 @@ const property = () =>{
     const [slideNumber,setSlideNumber]=useState(0);
     const [openImg,setOpenImg]=useState(false);
     const [openPopUp,setOpenPopUp]=useState(false)
+    const [openPopUpReview,setOpenPopUpReview]=useState(false)
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -51,7 +53,14 @@ const property = () =>{
     const handleNavigate=(path)=>{
         navigate(`/account/${path}`)
     }
-    const sameUser = data.currentOwner==user._id ?true :false
+    let sameUser=false
+    if(user){
+        sameUser = data.currentOwner==user._id ?true :false
+    }
+    
+    const handleUserStateReview=()=>{
+        (!sameUser) ?setOpenPopUpReview(true) : alert("you're not allowed to do that")
+    }
 
     return(
         <div>
@@ -114,8 +123,12 @@ const property = () =>{
                     /></a></>}<div >
                         </div>
                 </div>
+                <button onClick={handleUserStateReview}>review</button>
             </div>)}
-            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} propertyId={propertyId} currentUser={currentUser}/>}
+            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} propertyId={propertyId} currentUser={currentUser}/>
+            }
+            {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} propertyId={propertyId}/>
+            }
             
         </div>
     )
