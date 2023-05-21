@@ -6,13 +6,12 @@ import { addContract } from '../../../../Backend/controllers/DemandController'
 import './PopUpRes.css'
 import useFetch from '../../hooks/useFetch'
 import axios from 'axios'
-const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
+const PopUpRes = ({setOpenPopUp,setShowSuccessPopUp,propertyId,currentUser}) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
     try{
     axios.post('http://localhost:8800/contract/addContract',{
       propertyId: propertyId,
@@ -23,6 +22,7 @@ const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
   }catch(error){
     console.log(error)
   }
+  setShowSuccessPopUp(true)
   };
   //console.log(data)
   return (
@@ -55,7 +55,7 @@ const PopUpRes = ({setOpenPopUp,propertyId,currentUser}) => {
                     />
                   </label>
 
-                  <button className='btnSub' type="submit">طلب الحجز</button>
+                  <button className='btnSub' type="submit" >طلب الحجز</button>
               </form>
         </div>
     </div>

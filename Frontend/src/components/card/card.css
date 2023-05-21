@@ -25,10 +25,7 @@
     cursor: pointer;
 }
 
-.card--image:hover {
-    opacity: 0.6;
-    transition: all 0.2s ease;
-}
+
 
 /* ADD */
 .card--title {
@@ -54,8 +51,20 @@
     position: absolute;
     top: 6px;
     left: 6px;
-    background-color: white;
+    background-color: transparent;
     padding: 5px 7px;
     border-radius: 2px;
     font-weight: bold;
+    color: white;
+    
 }
+
+.card--badge:hover{
+    color: yellow;
+  }
+
+  .icon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }

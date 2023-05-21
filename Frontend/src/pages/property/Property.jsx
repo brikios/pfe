@@ -3,8 +3,7 @@ import { Navbar } from "../../components/navbar/Navbar";
 import { Header } from "../../components/header/Header";
 import './property.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocation, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-//import { useState } from "react";
+import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark,  faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import useFetch from './../../hooks/useFetch.js'
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -13,6 +12,8 @@ import PopUpRes from "../../components/popUpRes/PopUpRes";
 import Profile from "../../components/profile/Profile";
 import useFetch2 from "../../hooks/useFetch2";
 import PopUpReview from "../../components/popUpReview/PopUpReview";
+import SuccessPopUp from "../../successPopUp/SuccessPopUp";
+
 const property = () =>{
     const location= useLocation();
     const navigate=useNavigate();
@@ -22,6 +23,8 @@ const property = () =>{
     const [openImg,setOpenImg]=useState(false);
     const [openPopUp,setOpenPopUp]=useState(false)
     const [openPopUpReview,setOpenPopUpReview]=useState(false)
+    const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
+
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -125,11 +128,11 @@ const property = () =>{
                 </div>
                 <button onClick={handleUserStateReview}>review</button>
             </div>)}
-            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} propertyId={propertyId} currentUser={currentUser}/>
+            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser}/>
             }
-            {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} propertyId={propertyId}/>
+            {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId}/>
             }
-            
+            {showSucessPopUp && <SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp} />}
         </div>
     )
 }

@@ -84,6 +84,7 @@ const Home = () =>{
                       city={Property.city}
                       title={Property.title}
                       price={Property.price} 
+                      totalRating={Property.ratingCount}
                      />
                      
                      </a> 

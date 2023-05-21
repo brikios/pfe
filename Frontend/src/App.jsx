@@ -13,20 +13,19 @@ import { AuthContext, AuthContextProvider } from './context/AuthContext.jsx'
 import { useContext } from 'react'
 
 function App() {
-  const {user} = useContext(AuthContext)
 
   return (
     <BrowserRouter>
     <AuthContextProvider>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='login' element={user ?  <Navigate to='/' /> : <Login />}  /> 
+        <Route path='login' element={<Login />}  /> 
         <Route path='/properties' element={<Properties />} />
         <Route path='/property' element={<Property />} />
         <Route path='/property/:id' element={<Property />} />
         <Route path='logout' element={<Logout />} />
         <Route path='/account/:id' element={<Account />} />
-        <Route path='/messages' element={!user ?  <Navigate to='/' /> : <Messages />} />
+        <Route path='/messages' element={<Messages />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>
