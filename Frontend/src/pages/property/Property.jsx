@@ -13,6 +13,7 @@ import Profile from "../../components/profile/Profile";
 import useFetch2 from "../../hooks/useFetch2";
 import PopUpReview from "../../components/popUpReview/PopUpReview";
 import SuccessPopUp from "../../successPopUp/SuccessPopUp";
+import ReportPopUp from "../../components/reportPopUp/ReportPopUp";
 
 const property = () =>{
     const location= useLocation();
@@ -24,7 +25,7 @@ const property = () =>{
     const [openPopUp,setOpenPopUp]=useState(false)
     const [openPopUpReview,setOpenPopUpReview]=useState(false)
     const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
-
+    const [openReportPopUp,setOpenReportPopUp]=useState(false)
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -62,8 +63,19 @@ const property = () =>{
     }
     
     const handleUserStateReview=()=>{
+        if(user){
         (!sameUser) ?setOpenPopUpReview(true) : alert("you're not allowed to do that")
+    }else{
+        navigate('/login')
     }
+    }
+    
+    const handleUserStateReport=()=>{
+        if(user){
+        (!sameUser) ?setOpenReportPopUp(true) : alert("you're not allowed to do that")
+    }else{
+        navigate('/login')
+    }}
 
     return(
         <div>
@@ -127,12 +139,14 @@ const property = () =>{
                         </div>
                 </div>
                 <button onClick={handleUserStateReview}>review</button>
+                <button onClick={handleUserStateReport}>report</button>
             </div>)}
             {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser}/>
             }
             {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId}/>
             }
             {showSucessPopUp && <SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp} />}
+            {openReportPopUp && <ReportPopUp setOpenReportPopUp={setOpenReportPopUp} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId} />}
         </div>
     )
 }

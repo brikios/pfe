@@ -8,6 +8,7 @@ import contractRoute from "./routes/contract.js"
 import conversationRoute from "./routes/conversation.js"
 import messageRoute from "./routes/message.js"
 import reviewRoute from "./routes/review.js"
+import reportRoute from "./routes/report.js"
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import { verifyTokenContract } from "./middlewares/verifyToken.js";
@@ -36,6 +37,7 @@ app.use("/contract",contractRoute)
 app.use("/conversation",conversationRoute)
 app.use("/message",messageRoute)
 app.use("/review",reviewRoute)
+app.use("/report",reportRoute)
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })

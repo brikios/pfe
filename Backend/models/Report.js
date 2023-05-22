@@ -21,6 +21,11 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status:{
+    type: String,
+    enum: ['draft', 'accepted', 'refused'],
+    default:"draft",
+  }
 },{   timestamps : true   });
 
 

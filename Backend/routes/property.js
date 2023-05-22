@@ -11,7 +11,6 @@ import { createProperty,
         getPropertyByOwner
     }
     from "../controllers/PropertyController.js";
-import { verifyUser } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
