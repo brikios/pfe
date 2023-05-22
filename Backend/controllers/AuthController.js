@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt  from "jsonwebtoken";
 import { createError } from "../middlewares/errorHandler.js";
-import Cookies from 'js-cookie';
 
 //REGISTRE USER
 export const registreUser = async (req,res,next)=>{

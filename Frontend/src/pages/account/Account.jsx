@@ -19,7 +19,7 @@ const Account = () => {
         const {user} = useContext(AuthContext)
         const {data2,load,err,ref} = useFetch2(`http://localhost:8800/property/getByOwner/${userId}`)
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
-        
+        const {dat,loa,er,refr}=useFetch(`http://localhost:8800/contract/countContract/${userId}`)
        
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
@@ -43,7 +43,7 @@ const Account = () => {
         </div>
         <div>
           <h3>عملية كراء</h3>
-          <p>456</p>
+          <p>150</p>
         </div>
         <div>
           <h3>متابعين</h3>

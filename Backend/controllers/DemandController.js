@@ -32,3 +32,14 @@ export const addContract = async (req, res, next) => {
     await contract.save();
     res.status(201).send(contract);
   };
+
+
+  export const countContractsByOwner = async(req,res,next)=>{
+    
+    try{
+        const CountContract = await Contract.countDocuments({owner:req.params.id})
+        res.status(200).json({sumContract:CountContract});
+    }catch(err){
+        next(err)
+    }
+}

@@ -11,6 +11,7 @@ import Account from './pages/account/Account.jsx'
 import Messages from './pages/messages/Messages.jsx'
 import { AuthContext, AuthContextProvider } from './context/AuthContext.jsx'
 import { useContext } from 'react'
+import Registre from './pages/register/Registre.jsx'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='logout' element={<Logout />} />
         <Route path='/account/:id' element={<Account />} />
         <Route path='/messages' element={<Messages />} />
+        <Route path='/register' element={<Registre />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>
