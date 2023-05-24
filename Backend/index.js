@@ -9,6 +9,7 @@ import conversationRoute from "./routes/conversation.js"
 import messageRoute from "./routes/message.js"
 import reviewRoute from "./routes/review.js"
 import reportRoute from "./routes/report.js"
+import paymentRoute from "./routes/payment.js";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import { verifyTokenContract } from "./middlewares/verifyToken.js";
@@ -38,6 +39,7 @@ app.use("/conversation",conversationRoute)
 app.use("/message",messageRoute)
 app.use("/review",reviewRoute)
 app.use("/report",reportRoute)
+app.use("/payment",paymentRoute)
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })
@@ -56,7 +58,7 @@ app.use((err, req, res, next) => {
 app.get("/",(req,res)=>{
     res.send("yalla go !!")
 })
-app.listen(8800,()=>{
+app.listen(process.env.PORT,()=>{
     connect();
     console.log("connected to backend");
 })

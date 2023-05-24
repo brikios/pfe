@@ -13,6 +13,7 @@ import { AuthContext, AuthContextProvider } from './context/AuthContext.jsx'
 import { useContext } from 'react'
 import Registre from './pages/register/Registre.jsx'
 import Contract from './pages/contract/Contract.jsx'
+import Package from './pages/package/Package.jsx'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/messages' element={<Messages />} />
         <Route path='/register' element={<Registre />} />
         <Route path='/contract' element={<Contract />} />
+        <Route path='/package' element={<Package />}/>
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>

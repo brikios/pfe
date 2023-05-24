@@ -32,8 +32,9 @@ export const Navbar = () => {
                         
                         </>)  
            :( <div className="navItems">
-           
-                <button className='navButton' >إشترك</button>
+                  <Link to={'http://localhost:5173/register'} >
+                    <button className='navButton' >إشترك</button>
+                </Link>
                 <Link to={'http://localhost:5173/login'} >
                 <button className='navButton'>سجل الدخول</button>
                 </Link>

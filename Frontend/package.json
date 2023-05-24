@@ -16,7 +16,7 @@
         "@mui/base": "^5.0.0-beta.1",
         "autoprefixer": "^10.4.14",
         "axios": "^1.4.0",
-        "bootstrap": "^5.2.3",
+        "bootstrap": "^5.3.0-alpha3",
         "js-cookie": "^3.0.5",
         "jsonwebtoken": "^9.0.0",
         "mdb-react-ui-kit": "^6.0.0",
