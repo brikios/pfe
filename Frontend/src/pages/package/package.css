@@ -92,10 +92,11 @@
   }
   
   .pricing-features {
-    color: #016FF9;
+    color: #98D8AA;
     font-weight: 600;
     letter-spacing: 1px;
     margin: 50px 0 25px;
+    font-family: 'Readex Pro',sans-serif;
   }
   
   .pricing-features-item {
@@ -110,21 +111,22 @@
   }
   
   .pricing-price {
-    color: #016FF9;
+    color: #98D8AA;
     display: block;
     font-size: 32px;
     font-weight: 700;
   }
   
   .pricing-button {
-    border: 1px solid #9dd1ff;
+    border: 1px solid #98D8AA;
     border-radius: 10px;
-    color: #348EFE;
+    color: #98D8AA;
     display: inline-block;
     margin: 25px 0;
     padding: 15px 35px;
     text-decoration: none;
     transition: all 150ms ease-in-out;
+    cursor: pointer;
   }
   
   .pricing-button:hover,
@@ -133,11 +135,11 @@
   }
   
   .pricing-button.is-featured {
-    background-color: #48aaff;
+    background-color: #98D8AA;
     color: #fff;
   }
   
   .pricing-button.is-featured:hover,
   .pricing-button.is-featured:active {
-    background-color: #269aff;
+    background-color: #98D8AA;
   }

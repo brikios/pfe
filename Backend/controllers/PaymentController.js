@@ -8,8 +8,8 @@ export const addPayment=async(req,res,next)=>{
         "amount": req.body.amount,
         "accept_card": "true",
         "session_timeout_secs": 1200,
-        "success_link": "http://localhost:8800/success",
-        "fail_link": "http://localhost:8800/fail",
+        "success_link": "http://localhost:5173/",
+        "fail_link": "http://localhost:5173/",
         "developer_tracking_id": process.env.FLOUCI_TRACKING_ID
     }
     await axios

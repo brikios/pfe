@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Home.css"
 import "./../../components/card/card.css"
 import { Navbar } from "../../components/navbar/Navbar";
@@ -8,14 +8,15 @@ import PropertyList from "../../components/propertyList/PropertyList";
 import Banner from "../../components/banner/Banner";
 import Card from "../../components/card/Card";
 import { useEffect, useState } from "react";
-import {readInfiniteScrollProperty} from './../../api/Property.js'
+
 import EndAlert from "../../components/endAlert/EndAlert";
 import InfiniteScroll from "react-infinite-scroll-component"
-//import {infiniteScroll,handleScroll} from "./../../hooks/infiniteScroll";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import property from "../property/Property";
-import { Link } from 'react-router-dom'
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+import SuccessPopUp from "../../successPopUp/SuccessPopUp";
+import FailurePopUp from "../../components/failurePopUp/FailurePopUp";
+import { AuthContext } from "../../context/AuthContext";
 
 
 const LIMIT = 8;
@@ -24,14 +25,36 @@ const Home = () =>{
   useEffect(()=>{
     document.title='داري - يمكنك الحصول على أفضل العروض على موقعنا'
 },[])
+const {user}=useContext(AuthContext)
     const navigate=useNavigate();
     const [properties,setProperties]=useState([]);
-    //const [skip,setSkip]=useState(0);
+    const [searchParams,setSearchParams]=useSearchParams();
+    const [result,setResult]=useState('');
     const [totalProperties, setTotalProperties] = useState(0);
+    const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
+    const [showFailurePopUp,setShowFailurePopUp]=useState(false)
     const [activePage, setActivePage] = useState(1);
     useEffect(() => {
 		fetchProperties();
 	}, []);
+
+  useEffect(()=>{
+    axios.post(`http://localhost:8800/payment/verifyPayment/${searchParams.get("payment_id")}`)
+    .then(res=>{
+      setResult(res.data.result.status)
+      addAdsTokens(5)
+    },[])
+    .catch(err=>{console.log(err)})
+  },[])
+  
+  const addAdsTokens=(number)=>{
+    try{
+    axios.put(`http://localhost:8800/users/updateUserAdsToken/${user._id}`,{
+      adsTokens:number
+    })}catch(err){
+      console.log(err)
+    }
+  }
   const handleNavigate=(propId)=>{
     navigate(`property/${propId}`)
   }
@@ -49,8 +72,18 @@ const Home = () =>{
           console.log(error.response);
         })
       }
-    
+    useEffect(()=>{
+      if(result === "SUCCESS"){
+        setShowSuccessPopUp(true)
+        setResult('')
+      }else if(result === "FAILURE"){
+        setShowFailurePopUp(true)
+        setResult('')
+      }
+    })
 
+    
+      
 
     
     //console.log(properties)
@@ -95,6 +128,8 @@ const Home = () =>{
             
 
             </div>
+            { showSucessPopUp && (<SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp}/>)}  
+            {showFailurePopUp && (<FailurePopUp  setShowFailurePopUp={setShowFailurePopUp}/>)}
             
         </div>
     )

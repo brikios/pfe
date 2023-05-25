@@ -25,6 +25,7 @@ export const Navbar = () => {
                           <div className="dropdown-content">
                             <a className='link' onClick={()=>handleNavigate(`/account/${user._id}`)}>حسابي</a>
                             <a className='link' onClick={()=>handleNavigate(`/contract`)}>عقود</a>
+                            <a className='link' onClick={()=>handleNavigate(`/package`)}>إشهار</a>
                             <a className='link' onClick={()=>handleNavigate('/logout')}>خروج</a>
                             
                           </div>

@@ -11,6 +11,15 @@ export const updateUser = async(req,res)=>{
     }
 }
 
+export const updateUserAdsToken= async(req,res,next)=>{
+    try{
+        const updatedUserAdsToken = await User.findByIdAndUpdate(req.params.id,{ $set :{adsTokens:req.body.adsTokens}},{new:true})
+       
+        res.status(200).json(updatedUserAdsToken)
+    }catch(err){
+        next(err)
+    }
+}
 
 //DELETE User
 export const deleteUser = async(req,res)=>{

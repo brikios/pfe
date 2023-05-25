@@ -13,7 +13,7 @@
             <FontAwesomeIcon icon={faCheck} className='check' />
         </div>
         <div class="notification-text">
-            <span>تعليقك مهم لنا</span>
+            <span>تمت العملية بنجاح</span>
             
         </div>
         <button class="close-btn" onClick={handleExitBtn}><FontAwesomeIcon icon={faXmark} /></button>

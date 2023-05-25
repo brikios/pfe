@@ -3,7 +3,8 @@ import {
     updateUser,
     deleteUser,
     getUser,
-    getUsers}
+    getUsers,
+    updateUserAdsToken}
 from "../controllers/UserController.js";
 import { verifyUser,verifyAdmin,verifyToken, authMiddleware, verifyTokenContract } from "../middlewares/verifyToken.js";
 const router = express.Router();
@@ -28,6 +29,7 @@ router.get('/checkadmin/:id',(req,res,next)=>{
 //UPDATE User
 router.put("/update/:id",updateUser)
 
+router.put("/updateUserAdsToken/:id",updateUserAdsToken)
 //DELETE User
 router.delete("/delete/:id",deleteUser)
 
