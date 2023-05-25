@@ -8,7 +8,7 @@ export const addPayment=async(req,res,next)=>{
         "amount": req.body.amount,
         "accept_card": "true",
         "session_timeout_secs": 1200,
-        "success_link": "http://localhost:5173/",
+        "success_link": `http://localhost:5173/?amount=${req.body.amount}&`,
         "fail_link": "http://localhost:5173/",
         "developer_tracking_id": process.env.FLOUCI_TRACKING_ID
     }
@@ -30,6 +30,7 @@ export const verifyPayment=async (req,res,next)=>{
       }})
     .then(result=>{
         res.send(result.data)
+        
     })
     .catch(err=>{console.error(err)})
 }

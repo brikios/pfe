@@ -39,10 +39,11 @@ const {user}=useContext(AuthContext)
 	}, []);
 
   useEffect(()=>{
-    axios.post(`http://localhost:8800/payment/verifyPayment/${searchParams.get("payment_id")}`)
+    axios.post(`http://localhost:8800/payment/verifyPayment/${searchParams.get("?payment_id")}`)
     .then(res=>{
       setResult(res.data.result.status)
-      addAdsTokens(5)
+      
+       
     },[])
     .catch(err=>{console.log(err)})
   },[])
@@ -68,19 +69,33 @@ const {user}=useContext(AuthContext)
           setActivePage(activePage+ 1);
           setProperties([...properties, ...data.records]);
           setTotalUsers(data.total)
-        }).catch(error => {
-          console.log(error.response);
-        })
+        }).catch(error => {console.log(error);})
       }
-    useEffect(()=>{
-      if(result === "SUCCESS"){
-        setShowSuccessPopUp(true)
-        setResult('')
-      }else if(result === "FAILURE"){
-        setShowFailurePopUp(true)
-        setResult('')
-      }
-    })
+      useEffect(() => {
+        if (result === "SUCCESS") {
+          setShowSuccessPopUp(true);
+          setResult('');
+          if (searchParams.get("amount")=="30000") {
+            addAdsTokens(1);
+          } else if (searchParams.get("amount")=="80000") {
+            addAdsTokens(3);
+          } else if (searchParams.get("amount")=="180000") {
+            addAdsTokens(7);
+          }
+          setSearchParams(new URLSearchParams());
+          const disableBackNavigation = (event) => {
+            event.preventDefault();
+          };
+          window.addEventListener('popstate', disableBackNavigation);
+          
+          return () => {
+            window.removeEventListener('popstate', disableBackNavigation);
+          };
+        } else if (result === "FAILURE") {
+          setShowFailurePopUp(true);
+          setResult('');
+        }
+      }, [result, searchParams, setSearchParams]);
 
     
       
