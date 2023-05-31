@@ -17,10 +17,11 @@ const PropertySchema = new mongoose.Schema({
     },
     adress:{
         type: String,
-        required: true 
+        required: false 
     },
     images:{
         type: [String],
+        required:true
     },
     title:{
         type: String,

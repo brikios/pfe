@@ -21,7 +21,7 @@ const Account = () => {
         const {data2,load,err,ref} = useFetch2(`http://localhost:8800/property/getByOwner/${userId}`)
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
         const {dat,loa,er,refr}=useFetch(`http://localhost:8800/contract/countContract/${userId}`)
-       
+        const currentUser = user._id
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
         })
@@ -80,7 +80,7 @@ const Account = () => {
               )})
     }
     </div>
-    {openAddPropertyPopUp && <AddPropertyPopUp setOpenAddPropertyPopUp={setOpenAddPropertyPopUp} />}
+    {openAddPropertyPopUp && <AddPropertyPopUp setOpenAddPropertyPopUp={setOpenAddPropertyPopUp} currentUser={currentUser} />}
     </div>
     
   )

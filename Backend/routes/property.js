@@ -12,11 +12,13 @@ import { createProperty,
     }
     from "../controllers/PropertyController.js";
 
+    import  upload  from'../utils/UploadImages.js'
+import { verifyToken, verifyTokenContract, verifyUser } from "../middlewares/verifyToken.js";
+
 const router = express.Router();
 
 //ADD PROPERTY
-router.post("/add",createProperty)
-
+router.post("/add",verifyTokenContract,upload.array('images', 6),createProperty) 
 //UPDATE PROPERTY
 router.put("/update/:id",updatedProperty)
 

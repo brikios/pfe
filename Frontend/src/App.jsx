@@ -14,13 +14,26 @@ import { useContext } from 'react'
 import Registre from './pages/register/Registre.jsx'
 import Contract from './pages/contract/Contract.jsx'
 import Package from './pages/package/Package.jsx'
+import ConfirmEmail from './pages/confirmEmail/ConfirmEmail.jsx'
+import PrivateRoute from './utils/PrivateRoute.jsx'
+
 
 function App() {
+  const { user } = useContext(AuthContext);
 
   return (
     <BrowserRouter>
     <AuthContextProvider>
+   
+
       <Routes>
+      <PrivateRoute path="/protected" element={<ConfirmEmail />} />
+        <PrivateRoute path="/logout" element={<Logout />} />
+        <PrivateRoute
+            path="/protectedRoute1"
+            element={user?.isConfirmed ? <ConfirmEmail /> : <Navigate to="/confirm" replace />}
+          />
+        <Route path='/confirm' element={<ConfirmEmail />}/>
         <Route path='/' element={<Home />} />
         <Route path='login' element={<Login />}  /> 
         <Route path='/properties' element={<Properties />} />
@@ -32,6 +45,8 @@ function App() {
         <Route path='/register' element={<Registre />} />
         <Route path='/contract' element={<Contract />} />
         <Route path='/package' element={<Package />}/>
+      
+        
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>

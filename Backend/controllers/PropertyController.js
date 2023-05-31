@@ -1,15 +1,33 @@
-import Property from "../models/Property.js";
-//ADD PROPERTY
-
-export const createProperty = async (req,res)=>{
-    const newProperty = new Property({ ...req.body, currentOwner: req.user.id })
-    try{
-        const savedProperty = await newProperty.save()
-        res.status(200).json(savedProperty);
-    }catch(err){
-        res.status(500).json(err) 
+import Property from '../models/Property.js';
+import upload from '../utils/UploadImages.js';
+import cloudinary from 'cloudinary';
+export const createProperty = async (req, res,next) => {
+    
+        const {title,description,price,city,type}=req.body
+      const images = await Promise.all(
+        req.files.map(async (file) => {
+          const result = await cloudinary.v2.uploader.upload(file.path);
+          return result.secure_url;
+        })
+      );
+      
+      try {
+      const newProperty = new Property({
+        title:title,
+        description:description,
+        price:price,
+        city:city,
+        type:type,
+        images:images,  
+        currentOwner: req.user.id,
+      });
+  
+      const savedProperty = await newProperty.save();
+      res.status(200).json(savedProperty);
+    } catch (err) {
+        console.error(error.response);
     }
-}
+  };
 
 //GET PROPERTY OWNER
 export const getPropertyByOwner = async (req,res)=>{

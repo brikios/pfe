@@ -3,7 +3,7 @@ import multer from 'multer';
 import multerStorage from 'multer-storage-cloud-storage';
 import mongoose from 'mongoose'
 import Property from '../models/Property'
-import dotenv from''
+import dotenv from'dotenv'
 admin.initializeApp({
     credential: admin.credential.cert({
       projectId: process.env.PROJECT_ID,

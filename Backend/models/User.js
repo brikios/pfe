@@ -34,6 +34,14 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    "isConfirmed": {
+      type: Boolean,
+      default: false
+    },
+    "confirmationCode": {
+      type: String,
+      required: true
+    }
     },
     {   timestamps : true   }
 )
