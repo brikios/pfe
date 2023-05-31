@@ -1,19 +1,18 @@
-import { Route, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext.jsx';
 
+const PrivateRoute = ({ element: Element, ...rest }) => {
+  const { user } = useContext(AuthContext);
+  
+  
 
-const PrivateRoute = ({ element: Element, path }) => {
-    const { user } = useContext(AuthContext);
-  if(user){
-    if (!user.isConfirmed && path !== '/confirm') {
+  if (user && !user.isConfirmed && rest.path !== '/confirm') {
+      // User is not confirmed, redirect to the confirmation page
       return <Navigate to="/confirm" replace />;
     }
-  
-    if (path === '/logout') {
-      return <Navigate to="/" replace />;
-    }
-  
-    return <Route path={path} element={<Element />} />;
-  }};
+
+    return <Route {...rest} element={Element} />;
+  };
+
 export default PrivateRoute;

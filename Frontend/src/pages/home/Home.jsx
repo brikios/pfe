@@ -47,7 +47,12 @@ const {user}=useContext(AuthContext)
     },[])
     .catch(err=>{console.log(err)})
   },[])
-  
+  useEffect(()=>{
+    if(user && !user.isConfirmed){
+      navigate('/confirm')
+    }
+    
+  },[])
   const addAdsTokens=(number)=>{
     try{
     axios.put(`http://localhost:8800/users/updateUserAdsToken/${user._id}`,{

@@ -34,6 +34,12 @@ const property = () =>{
     const {data2,load,err,ref} = useFetch2(`http://localhost:8800/users/get/${data.currentOwner}`)
     const {user}=useContext(AuthContext);
     useEffect(()=>{
+        if(user && !user.isConfirmed){
+          navigate('/confirm')
+        }
+      },[])
+      
+    useEffect(()=>{
         document.title=`${data.title}`
         
     })

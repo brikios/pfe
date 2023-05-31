@@ -8,6 +8,7 @@ import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
 import {io} from 'socket.io-client'
+import { useNavigate } from 'react-router-dom'
 const messages = () => {
   const[conv,setConv]=useState([])
   const[chat,setChat]=useState(null)
@@ -17,7 +18,17 @@ const messages = () => {
   const socket =useRef()
   const {user}=useContext(AuthContext)
   const scrollRef = useRef()
-
+  const navigate=useNavigate()
+  useEffect(()=>{
+    if(user && !user.isConfirmed){
+      navigate('/confirm')
+    }
+  },[])
+  useEffect(()=>{
+    if(user==null){
+      navigate('/login')
+    }
+  },[])
   useEffect(()=>{
     socket.current=io("ws://localhost:8900")
     socket.current.on("getMessage",data=>{
@@ -32,13 +43,14 @@ const messages = () => {
     arrivalMessage &&chat?.members.includes(arrivalMessage.sender)&&
     setMessagess((prev)=>[...prev,arrivalMessage])
   },[arrivalMessage,chat])
- 
+ if(user){
   useEffect(()=>{
     const getConversations=async()=>{
       try{
+        
       const res = await axios.get(`http://localhost:8800/conversation/getconvbyid/${user._id}`)
       setConv(res.data)
-      
+    
     }catch(err){
       console.log(err)
     }
@@ -46,6 +58,7 @@ const messages = () => {
     }
     getConversations()
   },[user._id])
+}
    useEffect(()=>{
       socket.current.emit("addUser",user._id) 
       socket.current.on("getUsers",users=>{

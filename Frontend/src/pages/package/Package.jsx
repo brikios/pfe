@@ -9,7 +9,16 @@ const Package = () => {
 
     const {user}=useContext(AuthContext)
     const navigate=useNavigate()
-   
+    useEffect(()=>{
+      if(user && !user.isConfirmed){
+        navigate('/confirm')
+      }
+    },[])
+    useEffect(()=>{
+      if(user==null){
+        navigate('/login')
+      }
+    },[])
     useEffect(() => {
         document.title = 'عروض الإشهار';
         console.log(amount);

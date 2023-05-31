@@ -40,9 +40,17 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: null,
       };
-    default:
-      return state;
-  }
+      case "REFRESH_TOKEN":
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            token: action.payload,
+          },
+        };
+      default:
+        return state;
+    }
 };
 
 export const AuthContextProvider = ({ children }) => {
@@ -52,7 +60,22 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("user",JSON.stringify(state.user))
     Cookies.set("user", JSON.stringify(state.user));
   }, [state.user]);
+  const refreshToken = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const res = await axios.post("http://localhost:8800/auth/refresh-token", {
+        userId: user._id, 
+      });
+    
+      const { token, user: refreshedUser  } = res.data;
+      localStorage.setItem("user",JSON.stringify(refreshedUser))
+      Cookies.set("access_token", JSON.stringify(token));
 
+      dispatch({ type: "LOGIN_SUCCESS", payload: { token, user:refreshedUser } });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -60,6 +83,7 @@ export const AuthContextProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         dispatch,
+        refreshToken,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import useFetch from '../../hooks/useFetch'
 import { AuthContext } from '../../context/AuthContext'
 import useFetch2 from '../../hooks/useFetch2'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const Contract = () => {
@@ -13,6 +14,17 @@ const Contract = () => {
         const {user}=useContext(AuthContext)
         //const {data,loading,ref,err}=useFetch(`http://localhost:8800/contract/getowner/${user._id}`)
         //const {data2,loading2,ref2,err2}=useFetch2(`http://localhost:8800/contract/getclient/${user._id}`)
+        const navigate=useNavigate()
+        useEffect(()=>{
+            if(user && !user.isConfirmed){
+              navigate('/confirm')
+            }
+          },[])
+          useEffect(()=>{
+            if(user==null){
+              navigate('/login')
+            }
+          },[])
         useEffect(()=>{
             const fetchDataClient = async()=>{
                 try{

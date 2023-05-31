@@ -3,7 +3,7 @@ import { Navbar } from '../../components/navbar/Navbar'
 import './account.css'
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 import Card from '../../components/card/Card';
 import "./../../components/card/card.css"
@@ -22,6 +22,7 @@ const Account = () => {
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
         const {dat,loa,er,refr}=useFetch(`http://localhost:8800/contract/countContract/${userId}`)
         const currentUser = user._id
+        const navigate=useNavigate()
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
         })
@@ -29,6 +30,16 @@ const Account = () => {
       if(user){
         sameUser = userId==user._id && user ?true :false
       }
+      useEffect(()=>{
+        if(user && !user.isConfirmed){
+          navigate('/confirm')
+        }
+      },[])
+      useEffect(()=>{
+        if(user==null){
+          navigate('/login')
+        }
+      },[])
   return (
     <div>
         <Navbar />

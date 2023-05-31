@@ -46,7 +46,15 @@ export const confirmUser = async(req,res,next)=>{
 
         user.isConfirmed=true
         await user.save()
-        res.status(200).json({message : "account confirmed success"})
+        const token = jwt.sign(
+            {
+              id: user._id,
+              name: user.name,
+              email: user.email,
+            },
+            process.env.JWT_SEC
+          );
+        res.status(200).json({message : "account confirmed success",token,user})
     }catch(err){
         next(err)
     }
@@ -87,7 +95,30 @@ export const loginUser = async (req,res,next)=>{
     }
 }
 
+export const refreshToken = async (req, res, next) => {
+    try {
+      const { userId } = req.body;
 
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return next(createError(404, 'User not found'));
+      }
+  
+      const token = jwt.sign(
+        {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        process.env.JWT_SEC
+      );
+  
+      res.json({ token, user });
+    } catch (error) {
+      next(error);
+    }
+  };
 export const logout = (req, res) => {
     res.clearCookie('access_token');
     res.status(200).json({ message: 'Logout successful' });
