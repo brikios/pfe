@@ -17,6 +17,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import SuccessPopUp from "../../successPopUp/SuccessPopUp";
 import FailurePopUp from "../../components/failurePopUp/FailurePopUp";
 import { AuthContext } from "../../context/AuthContext";
+import { EmblaCarousel } from "../../components/emblaCarousel/EmblaCarousel";
 
 
 const LIMIT = 8;
@@ -112,7 +113,7 @@ const {user}=useContext(AuthContext)
             <Navbar />
             <Header />
             <div className="homeContainer" >
-                <Featured />
+                <EmblaCarousel />
                 <h1 className="homeTitle">إبحث حسب نوع العقار</h1>
                 <PropertyList />
                 <Banner />
