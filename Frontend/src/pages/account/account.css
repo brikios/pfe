@@ -125,6 +125,11 @@
   .btnSet:hover {
     background: gray;
   }
+
+  .reportButtonAccount{
+    color: red;
+    cursor: pointer;
+  }
   
   .btnSet > svg {
     width: 34px;

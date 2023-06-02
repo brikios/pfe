@@ -13,6 +13,8 @@ import Contract from './pages/contract/Contract.jsx';
 import Package from './pages/package/Package.jsx';
 import ConfirmEmail from './pages/confirmEmail/ConfirmEmail.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
+import PageNotFound from './pages/pageNotFound/PageNotFound.jsx';
+import CookiesPolicies from './pages/cookiesPolicies/CookiesPolicies.jsx';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -32,8 +34,8 @@ function App() {
               <Route path="/messages" element={<Messages />} />
               <Route path="/contract" element={<Contract />} />
               <Route path="/package" element={<Package />} />
-          
-          
+              <Route path='*' element={<PageNotFound />} />
+              <Route path='/cookies' element={<CookiesPolicies />}/>
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Registre />} />
         </Routes>

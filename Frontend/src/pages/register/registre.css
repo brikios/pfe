@@ -46,3 +46,9 @@
     color: gray;
 	width: max-content;
   }
+
+  .cookies>a{
+	font-weight: bold;
+	cursor: pointer;
+	text-decoration: underline;
+  }

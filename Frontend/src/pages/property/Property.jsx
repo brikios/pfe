@@ -14,6 +14,7 @@ import useFetch2 from "../../hooks/useFetch2";
 import PopUpReview from "../../components/popUpReview/PopUpReview";
 import SuccessPopUp from "../../successPopUp/SuccessPopUp";
 import ReportPopUp from "../../components/reportPopUp/ReportPopUp";
+import EditPropertyPopUp from "../../components/editPropertyPopUp/EditPropertyPopUp.JSX";
 
 const property = () =>{
     const location= useLocation();
@@ -26,6 +27,8 @@ const property = () =>{
     const [openPopUpReview,setOpenPopUpReview]=useState(false)
     const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
     const [openReportPopUp,setOpenReportPopUp]=useState(false)
+    const [openEditPropertyPopUp,setOpenEditPropertyPopUp]=useState(false)
+
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -123,7 +126,7 @@ const property = () =>{
                             
                         </div>
                         {sameUser ?(<>
-                            <button class="button-56" role="button">تعديل</button></>)
+                            <button class="button-56" onClick={()=>setOpenEditPropertyPopUp(true)} role="button">تعديل</button></>)
                             :<div className="propertyDetailsPrice">
                             <h1>للكراء بالشهر أو بالأسبوع</h1>
                             <span>تريد ليلة نوم هانئة؟ حازت هذه المنشأة على تقييم عالٍ لما تتمتع به من مميزات مريحة للغاية.</span>
@@ -153,6 +156,7 @@ const property = () =>{
             }
             {showSucessPopUp && <SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp} />}
             {openReportPopUp && <ReportPopUp setOpenReportPopUp={setOpenReportPopUp} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId} />}
+            {openEditPropertyPopUp && <EditPropertyPopUp setOpenEditPropertyPopUp={setOpenEditPropertyPopUp} propertyId={propertyId} />}
         </div>
     )
 }

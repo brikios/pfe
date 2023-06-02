@@ -40,7 +40,7 @@ const AddPropertyPopUp = ({setOpenAddPropertyPopUp,currentUser}) => {
         console.log(data)
         try {
           await axios.post('http://localhost:8800/property/add', data, config);
-          console.log('success');
+          //console.log('success');
         } catch (error) {
           console.error(error);
         }

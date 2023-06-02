@@ -40,3 +40,9 @@
 	background-color: #98D8AA;
 	cursor: not-allowed;
   }
+
+  .link{
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
+  }

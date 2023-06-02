@@ -1,0 +1,176 @@
+.popUp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+  .inp {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid;
+    border-bottom: 1px solid;
+    width: 90%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+    outline: none;
+  }
+  .Pcontainer {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    text-align: right;
+    direction: rtl;
+    overflow-y: auto; /* Add this line to enable scrollbar */
+    max-height: 80vh; /* Adjust the maximum height as needed */
+  }
+  
+  .iconXmark {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #aaa;
+  }
+  
+  .formul {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lab {
+    margin: 20px 0;
+    padding-right: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    direction: rtl;
+  }
+  
+  .parag {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .slct{
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid;
+    border-bottom: 1px solid;
+    width: 90%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+    outline: none;
+  }
+  
+  .opt {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  
+  
+ 
+  
+  .btnSub {
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #98D8AA;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+  }
+  
+  .btnSub:hover {
+    background-color: #2bcc33be;
+  }
+  
+  @media (max-width: 768px) {
+    .Pcontainer {
+      width: 90%;
+      padding: 20px;
+      text-align: right;
+      direction: rtl;
+    }
+  
+    .lab {
+      font-size: 16px;
+      text-align: right;
+      direction: rtl;
+    }
+  
+    .date {
+      font-size: 14px;
+      padding: 8px;
+      direction: rtl;
+      text-align: right;
+    }
+  
+    .date::-webkit-calendar-picker-indicator {
+      right: initial;
+      left: 5px;
+      transform: translateY(-50%) scaleX(-1);
+    }
+  
+    .btnSub {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin-top: 20px;
+      margin-right: 0;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .lab {
+      font-size: 14px;
+    }
+  
+    .parag {
+      font-size: 16px;
+    }
+  
+    .date {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .btnSub {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+
+  .txtArea{
+    resize: none;
+    outline: none;
+  }

@@ -10,6 +10,8 @@ import "./../../components/card/card.css"
 import InfiniteScroll from "react-infinite-scroll-component"
 import useFetch2 from '../../hooks/useFetch2';
 import AddPropertyPopUp from '../../components/addPropertyPopUp/AddPropertyPopUp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamation, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -21,7 +23,7 @@ const Account = () => {
         const {data2,load,err,ref} = useFetch2(`http://localhost:8800/property/getByOwner/${userId}`)
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
         const {dat,loa,er,refr}=useFetch(`http://localhost:8800/contract/countContract/${userId}`)
-        const currentUser = user._id
+        
         const navigate=useNavigate()
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
@@ -35,11 +37,7 @@ const Account = () => {
           navigate('/confirm')
         }
       },[])
-      useEffect(()=>{
-        if(user==null){
-          navigate('/login')
-        }
-      },[])
+      
   return (
     <div>
         <Navbar />
@@ -57,11 +55,8 @@ const Account = () => {
           <h3>عملية كراء</h3>
           <p>150</p>
         </div>
-        <div>
-          <h3>متابعين</h3>
-          <p>789</p>
-        </div>
       </div>
+      {!sameUser ?<><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
       {sameUser ?<>
       <button className='btnAdd' onClick={()=>setOpenAddPropertyPopUp(true)}>
     <span>أضف ملكية</span>
@@ -91,7 +86,7 @@ const Account = () => {
               )})
     }
     </div>
-    {openAddPropertyPopUp && <AddPropertyPopUp setOpenAddPropertyPopUp={setOpenAddPropertyPopUp} currentUser={currentUser} />}
+    {openAddPropertyPopUp && <AddPropertyPopUp setOpenAddPropertyPopUp={setOpenAddPropertyPopUp} currentUser={user._id} />}
     </div>
     
   )

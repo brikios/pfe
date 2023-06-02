@@ -1,0 +1,37 @@
+.center{
+  position: absolute;
+  top: 50%;
+  left: 31%;
+  transform: translate(0, -50%);
+  padding-top: 50px;
+}
+
+
+.center >h1{
+  color: #98D8AA;
+  font-size: 50px;
+}
+
+
+.center >p{
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.center >button{
+  margin: 5px 150px 0px 0px;
+  padding: 5px 25px;
+  border-radius: 5px;
+  font-size: 20px;
+  color: white;
+  background-color: #98D8AA;
+  cursor: pointer;
+  border: none;
+}
+
+.image{
+    width: 550px;
+    height: 400px;
+    
+
+}
