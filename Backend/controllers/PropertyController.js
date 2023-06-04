@@ -61,6 +61,16 @@ export const deleteProperty = async(req,res)=>{
      }
 }
 
+//GET ALL PROPERTiet
+export const getAllProperties = async(req,res)=>{
+    try{
+        const properties=await Property.find();
+         res.status(200).json(properties);
+     }catch(err){
+         res.status(500).json(err) 
+     }
+}
+
 //GET PROPERTY
 
 export const getProperty = async(req,res,next)=>{
@@ -73,31 +83,35 @@ export const getProperty = async(req,res,next)=>{
         res.status(500).json(err) 
     }
 }
-// GET FEATURED
-export const getFeaturedProperty = async(req,res,next)=>{
-    try{
-        const featuredProperty = await Property.find({featured:true}).populate('currentOwner','-password')
-        return res.status(200),json(featuredProperty)
-    }catch(err){
-        return res.status(500).json(err.message)
-    }
-}
+
 //GET ALL PROPERTY
 
-export const getProperties = async(req,res)=>{
-    const {min,max,...others} = req.body;
-    //const city = req.query.city
-    try{
-        const getAllProperty = await Property.find({
-            city:req.query.city,
-            type:req.query.type,
-            price:{ $gte: req.query.min || 1, $lte: req.query.max || 999 }
-          });
-        res.status(200).json(getAllProperty);
-    }catch(err){
-        res.status(500).json(err) 
+export const getProperties = async (req, res) => {
+    const { city, type, min, max } = req.query;
+    const filters = {};
+  
+    
+    if (city) {
+      filters.city = city;
     }
-}
+    if (type) {
+      filters.type = type;
+    }
+    if (min && max) {
+      filters.price = { $gte: min, $lte: max };
+    } else if (min) {
+      filters.price = { $gte: min };
+    } else if (max) {
+      filters.price = { $lte: max };
+    }
+  
+    try {
+      const getAllProperty = await Property.find(filters);
+      res.status(200).json(getAllProperty);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
 
 export const countPropertiesByCity = async(req,res,next)=>{
     const cities = req.query.cities.split(",")
@@ -147,3 +161,4 @@ export const readInfiniteScroll = async(req,res,next)=>{
         res.status(400).json(error)
     }
 }
+

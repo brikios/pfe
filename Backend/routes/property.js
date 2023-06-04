@@ -8,7 +8,8 @@ import { createProperty,
         countPropertiesByCity,
         countPropertiesByType,
         readInfiniteScroll, 
-        getPropertyByOwner
+        getPropertyByOwner,
+        getAllProperties
     }
     from "../controllers/PropertyController.js";
 
@@ -33,6 +34,7 @@ router.get('/getByOwner/:id',getPropertyByOwner)
 //GET ALL PROPERTY
 router.get("/getall",getProperties)
 
+router.get("/getallpropeties",getAllProperties)
 
 router.get("/countByCity",countPropertiesByCity)
 

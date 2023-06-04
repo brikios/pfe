@@ -1,15 +1,54 @@
-import React from 'react'
-import './adsCard.css'
-const AdsCard = () => {
-  return (
-    <div className='banner'>
-        <img src="https://images.pexels.com/photos/1013427/pexels-photo-1013427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-        <div className='banner-content'>
-            <h3>title</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit recusandae soluta est provident, deleniti dolorum, in expedita cupiditate dignissimos error praesentium iure voluptas deserunt tempora minima vel incidunt qui illum!</p>
-        </div>
-    </div>
-  )
-}
+import React, { useEffect, useState } from 'react';
 
-export default AdsCard
+import Carousel from 'carousel-react-rcdev'
+ 
+
+import './adsCard.css';
+import useFetch from '../../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
+import Card from '../card/Card';
+
+const AdsCard = () => {
+  const { data, loading, error, refresh } = useFetch('http://localhost:8800/property/getallpropeties');
+  
+  const navigate=useNavigate()
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
+  return (
+    
+   
+      
+<Carousel>             
+   {data?.map((Property,index)=>{
+                {console.log(Property)}
+                return(
+                     <a onClick={()=>navigate(`/property/${Property._id}`)} >  
+
+                     <Card
+                       key={Property._id}
+                       img={Property.images[0]}
+                       rating={Property.rating}
+                       city={Property.city}
+                       title={Property.title}
+                       price={Property.price} 
+                       totalRating={Property.ratingCount}
+                      />
+                      
+                      </a> 
+                    ) } 
+                 )
+                 }
+               </Carousel>
+               
+
+           
+  );
+};
+
+export default AdsCard;

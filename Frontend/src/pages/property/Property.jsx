@@ -3,7 +3,7 @@ import { Navbar } from "../../components/navbar/Navbar";
 import { Header } from "../../components/header/Header";
 import './property.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark,  faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark,  faExclamationTriangle,  faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import useFetch from './../../hooks/useFetch.js'
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -15,6 +15,11 @@ import PopUpReview from "../../components/popUpReview/PopUpReview";
 import SuccessPopUp from "../../successPopUp/SuccessPopUp";
 import ReportPopUp from "../../components/reportPopUp/ReportPopUp";
 import EditPropertyPopUp from "../../components/editPropertyPopUp/EditPropertyPopUp.JSX";
+import axios from "axios";
+import Comments from "../../components/comments/Comments";
+
+
+  
 
 const property = () =>{
     const location= useLocation();
@@ -23,6 +28,7 @@ const property = () =>{
     const currentUser=JSON.parse(localStorage.getItem('id'))
     const [slideNumber,setSlideNumber]=useState(0);
     const [openImg,setOpenImg]=useState(false);
+    const[records,setRecords]=useState([])
     const [openPopUp,setOpenPopUp]=useState(false)
     const [openPopUpReview,setOpenPopUpReview]=useState(false)
     const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
@@ -59,6 +65,19 @@ const property = () =>{
             setSlideNumber(newSlideNumber)
     }
     
+    useEffect(()=>{
+        const getReviews=async()=>{
+            try{
+                const response = await axios.get(`http://localhost:8800/review/get/${propertyId}`)
+                setRecords(response.data)
+                //console.log(records)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        getReviews()
+       
+    },[])
 
     const handleUserState=()=>{
        (user) ? setOpenPopUp(true) : navigate('/login') 
@@ -105,12 +124,14 @@ const property = () =>{
                     <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={()=>handleImgChange('l')}/>
                 </div>}
                 <div className="propertyWrapper">
+                
                     <h1 className="propertyTitle">{data.name}</h1>
                     <div className="propertyAdress">
                         <FontAwesomeIcon icon={faLocationDot} />
                         <span>{data.adress}</span>
                     </div>
                     <span className="propertySubTitle">إحجز الان بأفضل الأسعار و يمكنك إلغاء الحجز لاحقا</span>
+                    
                     <div className="propertyImages">
                         {data.images?.map((img,index)=>(
                             <div className="propertyImageWrapper">
@@ -121,12 +142,16 @@ const property = () =>{
                     </div>
                     <div className="propertyDetails">
                         <div className="propertyDetailText">
+                        <button className="reportBtn" onClick={handleUserStateReport} ><FontAwesomeIcon icon={faExclamationTriangle} /> تبليغ عن الملكية</button>
                             <h1 className="propertyDescTitle">{data.title}</h1>
                             <p className="propertyDesc">{data.description}</p>
                             
                         </div>
                         {sameUser ?(<>
-                            <button class="button-56" onClick={()=>setOpenEditPropertyPopUp(true)} role="button">تعديل</button></>)
+                        
+                            <button class="button-56" onClick={()=>setOpenEditPropertyPopUp(true)} role="button">تعديل</button>
+                            <button className="button-56">أشهر هذه الملكية</button>
+                            </> )
                             :<div className="propertyDetailsPrice">
                             <h1>للكراء بالشهر أو بالأسبوع</h1>
                             <span>تريد ليلة نوم هانئة؟ حازت هذه المنشأة على تقييم عالٍ لما تتمتع به من مميزات مريحة للغاية.</span>
@@ -134,8 +159,9 @@ const property = () =>{
                             <button onClick={handleUserState}>احجز الآن</button>
                         </div>}
                         
-                        
+                       
                     </div>
+                    <div className="propertyDetails">
                     {sameUser ?<></>:<><a onClick={()=>handleNavigate(data2._id)}>
                         <Profile 
                     key={data2.id}
@@ -144,12 +170,31 @@ const property = () =>{
                     lastName={data2.lastName}
                     phone={data2.phone}
                     email={data2.email}
-                    /></a></>}<div >
-                        </div>
+                    /></a></>}
+                    <div className="propertyDetailsPrice1">
+                        {records.map((record,index)=>(
+                           <div>
+                            
+                                <Comments 
+                                img={record.user.img}
+                                    firstName={record.user.firstName}
+                                    lastName={record.user.lastName}
+                                    rating={record.rating}
+                                    comment={record.reviewText}
+                                />     
+                                <hr/>
+                               </div> 
+                        ))}
+                        
+                        
+                    </div>
+                    </div>
                 </div>
-                <button onClick={handleUserStateReview}>review</button>
-                <button onClick={handleUserStateReport}>report</button>
+                
+               {sameUser ? <></> :<button onClick={handleUserStateReview}>review</button>}
+                           
             </div>)}
+            
             {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser}/>
             }
             {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId}/>

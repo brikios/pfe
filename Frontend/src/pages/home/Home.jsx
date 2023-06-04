@@ -18,6 +18,8 @@ import SuccessPopUp from "../../successPopUp/SuccessPopUp";
 import FailurePopUp from "../../components/failurePopUp/FailurePopUp";
 import { AuthContext } from "../../context/AuthContext";
 import { EmblaCarousel } from "../../components/emblaCarousel/EmblaCarousel";
+import AdsCard from "../../components/adsCard/AdsCard";
+import useFetch from "../../hooks/useFetch";
 
 
 const LIMIT = 8;
@@ -38,7 +40,16 @@ const {user}=useContext(AuthContext)
     useEffect(() => {
 		fetchProperties();
 	}, []);
+  const dataCarousel=[]
+  const {data,loading,error,refresh} = useFetch('http://localhost:8800/property/getallpropeties')
 
+  useEffect(()=>{
+      
+      //console.log(data)
+      data.map((dat)=>{
+        dataCarousel.push({image:dat.images[0],caption:dat.title})
+      })
+  },[dataCarousel,loading])
   useEffect(()=>{
     axios.post(`http://localhost:8800/payment/verifyPayment/${searchParams.get("?payment_id")}`)
     .then(res=>{
@@ -113,7 +124,11 @@ const {user}=useContext(AuthContext)
             <Navbar />
             <Header />
             <div className="homeContainer" >
-                <EmblaCarousel />
+            <div className="containerStyle">
+            
+                <AdsCard />
+                
+            </div>
                 <h1 className="homeTitle">إبحث حسب نوع العقار</h1>
                 <PropertyList />
                 <Banner />

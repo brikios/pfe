@@ -1,0 +1,22 @@
+.time{
+    color: gray;
+    font-size: 7px;
+    width: 150px;
+}
+
+.com{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    width: 180px;
+    
+}
+
+.avatar{
+    padding-left: 5px;
+    padding-bottom: 5px;
+    height: 80px;
+    width: 80px;
+    border-radius: 2px;
+    object-fit: cover;
+}

@@ -102,6 +102,17 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.propertyDetailsPrice1{
+    flex: 1;
+    border: 1px solid;
+    padding: 20px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    border-radius: 4px;
+}
 
 .slider{
     position: sticky;
@@ -194,4 +205,11 @@
   
   .button-56:hover {
     outline: 0;
+  }
+
+  .reportBtn{
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
   }

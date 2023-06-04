@@ -70,7 +70,7 @@ export const AuthContextProvider = ({ children }) => {
       const { token, user: refreshedUser  } = res.data;
       localStorage.setItem("user",JSON.stringify(refreshedUser))
       Cookies.set("access_token", JSON.stringify(token));
-
+      
       dispatch({ type: "LOGIN_SUCCESS", payload: { token, user:refreshedUser } });
     } catch (error) {
       console.log(error);

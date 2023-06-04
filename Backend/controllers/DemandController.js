@@ -46,7 +46,7 @@ export const addContract = async (req, res, next) => {
 
 export const getContractByOwner = async (req,res,next)=>{
   try{
-    const ContractOwner = await Contract.find({owner:req.params.id}).populate('client')
+    const ContractOwner = await Contract.find({owner:req.params.id}).populate('client').populate('propertyId')
     res.status(200).json(ContractOwner)
   }catch(err){
     next(err)
@@ -55,7 +55,7 @@ export const getContractByOwner = async (req,res,next)=>{
 
 export const getContractByClient = async (req,res,next)=>{
   try{
-    const ContractClient = await Contract.find({client:req.params.id}).populate('owner').populate('client')
+    const ContractClient = await Contract.find({client:req.params.id}).populate('owner').populate('client').populate('propertyId')
     res.status(200).json(ContractClient)
   }catch(err){
     next(err)

@@ -29,3 +29,13 @@ export const addReview=async(req, res,next)=>{
   }
 }
 
+
+export const getReviewsById=async(req,res)=>{
+  try{
+  const review= await Review.find({property :req.params.id}).populate('user')
+  res.status(200).json(review)
+}catch(err)
+{
+  res.status(500).json(err)
+}
+}
