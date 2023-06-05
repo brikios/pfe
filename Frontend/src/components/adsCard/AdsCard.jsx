@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import Carousel from 'carousel-react-rcdev'
 
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 
 import './adsCard.css';
@@ -24,13 +25,19 @@ const AdsCard = () => {
   return (
     
    
-      
-<Carousel>             
+   
+<CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={125}
+        totalSlides={3}
+      > 
+      <Slider>       <Slide index={0}>    
    {data?.map((Property,index)=>{
                 {console.log(Property)}
                 return(
+                 
                      <a onClick={()=>navigate(`/property/${Property._id}`)} >  
-
+                      
                      <Card
                        key={Property._id}
                        img={Property.images[0]}
@@ -42,11 +49,14 @@ const AdsCard = () => {
                       />
                       
                       </a> 
+                      
                     ) } 
                  )
                  }
-               </Carousel>
-               
+                 </Slide>
+                 </Slider>  
+               </CarouselProvider>
+             
 
            
   );

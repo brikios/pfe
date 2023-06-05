@@ -85,7 +85,10 @@
   .date:focus::-webkit-calendar-picker-indicator {
     opacity: 1;
   }
-  
+  .headerSearchInput{
+    margin-bottom: 5px;
+    padding: 5px 15px;
+  }
   .btnSub {
     padding: 15px 30px;
     border-radius: 5px;

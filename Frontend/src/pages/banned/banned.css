@@ -33,5 +33,10 @@
     margin-bottom: 20px;
     font-size: 18px;
     color: #333;
-    max-width: 500px;
+    max-width: 750px;
+  }
+
+  .image{
+    width: 500px;
+    height: auto;
   }

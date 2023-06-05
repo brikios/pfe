@@ -191,7 +191,7 @@ const property = () =>{
                     </div>
                 </div>
                 
-               {sameUser ? <></> :<button onClick={handleUserStateReview}>review</button>}
+               {sameUser ? <></> :<button className="btnReview" onClick={handleUserStateReview}>أضف مراجعة</button>}
                            
             </div>)}
             

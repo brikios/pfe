@@ -178,6 +178,16 @@
     -webkit-user-select: none;
     touch-action: manipulation;
   }
+  .btnReview{
+    padding: 5px 15px;
+    background-color: #2a8844;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 15px;
+  }
   
   .button-56:after {
     background-color: #111;

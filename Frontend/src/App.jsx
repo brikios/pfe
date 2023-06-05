@@ -15,6 +15,7 @@ import ConfirmEmail from './pages/confirmEmail/ConfirmEmail.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
 import PageNotFound from './pages/pageNotFound/PageNotFound.jsx';
 import CookiesPolicies from './pages/cookiesPolicies/CookiesPolicies.jsx';
+import Banned from './pages/banned/Banned.jsx';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -36,6 +37,7 @@ function App() {
               <Route path="/package" element={<Package />} />
               <Route path='*' element={<PageNotFound />} />
               <Route path='/cookies' element={<CookiesPolicies />}/>
+              <Route path='/banned' element={<Banned />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Registre />} />
         </Routes>
