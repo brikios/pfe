@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import Carousel from 'carousel-react-rcdev'
- 
+
+
 
 import './adsCard.css';
 import useFetch from '../../hooks/useFetch';
