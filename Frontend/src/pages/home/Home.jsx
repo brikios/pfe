@@ -126,8 +126,8 @@ const {user}=useContext(AuthContext)
             <div className="homeContainer" >
             <div className="containerStyle">
             
-                <AdsCard />
-                
+                <AdsCard className="adsCard" />
+               
             </div>
                 <h1 className="homeTitle">إبحث حسب نوع العقار</h1>
                 <PropertyList />

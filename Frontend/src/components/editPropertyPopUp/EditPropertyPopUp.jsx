@@ -56,7 +56,7 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
             <TextareaAutosize aria-label="empty textarea" defaultValue={data.description} placeholder="أكتب هنا التفاصيل" className='txtArea' onChange={(e) =>setDescription(e.target.value)} />
             
             
-            <button className='btnSub' type="submit" >أرسل</button>
+            <button className='btnSub' type="submit" >عدّل</button>
           </form>
     </div>
 </div>

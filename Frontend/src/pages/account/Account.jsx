@@ -56,7 +56,7 @@ const Account = () => {
           <p>150</p>
         </div>
       </div>
-      {!sameUser ?<><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
+      {!sameUser ?<><button className='contactBtn'>راسل</button><br /><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
       {sameUser ?<>
       <button className='btnAdd' onClick={()=>setOpenAddPropertyPopUp(true)}>
     <span>أضف ملكية</span>

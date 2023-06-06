@@ -64,7 +64,7 @@ export const deleteProperty = async(req,res)=>{
 //GET ALL PROPERTiet
 export const getAllProperties = async(req,res)=>{
     try{
-        const properties=await Property.find();
+        const properties=await Property.find().populate('currentOwner');
          res.status(200).json(properties);
      }catch(err){
          res.status(500).json(err) 

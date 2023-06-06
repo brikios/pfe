@@ -1,77 +1,92 @@
-.messages{
-    height: calc(100vh- 70px);
+.messages {
+    height: calc(100vh - 70px);
     display: flex;
-}
-.chatMenu{
+  }
+  
+  .chatMenu {
     flex: 1.5;
-}
-
-.chatBox{
+    padding: 10px;
+  }
+  
+  .chatBox {
     position: relative;
     flex: 5.5;
-}
-
-.chatBoxWrapper{
+  }
+  
+  .chatBoxWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    
-}
-
-.chatBoxTop{
+    height: 100%;
+  }
+  
+  .chatBoxTop {
     height: 450px;
     overflow-y: scroll;
     padding-right: 10px;
-    overflow:auto;
-}
-
-.chatMenuWrapper, .chatBoxWrapper{
+    overflow: hidden;
+  }
+  
+  .chatBoxTop::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: #f5f5f5;
+  }
+  
+  .chatBoxTop::-webkit-scrollbar-thumb {
+    background-color: #000;
+  }
+  
+  .chatBoxTop::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+  
+  .chatMenuWrapper,
+  .chatBoxWrapper {
     padding: 10px;
     height: 100%;
-}
-
-.chatMenuInput{
-    width: 80%;
+  }
+  
+  .chatMenuInput {
+    width: 100%;
     padding: 10px 0px;
     border: none;
     border-bottom: 1px solid gray;
     outline: none;
-    
-}
-
-
-.chatBoxBottom{
+  }
+  
+  .chatBoxBottom {
     margin-top: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-}
-
-.chatMsgInp{
-    width: 80%;
+    padding: 10px;
+    background-color: #f5f5f5;
+  }
+  
+  .chatMsgInp {
+    width: 100%;
     height: 50px;
     padding: 10px;
     outline: none;
     resize: none;
-    
-}
-
-.chatBtn{
+  }
+  
+  .chatBtn {
     width: 70px;
     height: 40px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     color: white;
-    background-color: #98D8AA;
-    margin-left: 50px;
-}
-
-.noChat{
+    background-color: #98d8aa;
+    margin-left: 10px;
+  }
+  
+  .noChat {
     position: absolute;
-    top :20%;
-    font-style: 50px;
-    color : rgb(167, 167, 167)
-}
+    top: 20%;
+    font-size: 50px;
+    color: rgb(167, 167, 167);
+  }
+  
