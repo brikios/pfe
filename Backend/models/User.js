@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
     "confirmationCode": {
       type: String,
       required: true
+    },
+    "Banned": {
+      type: Boolean,
+      required: false
     }
     },
     {   timestamps : true   }

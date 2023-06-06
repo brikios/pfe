@@ -1,0 +1,17 @@
+.headerAdmin {
+    background: linear-gradient(to bottom right, #98D8AA, #6ABF84);
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    margin-right: 187px;
+    height: 50px;
+    margin-top: 0px;
+  }
+
+  .headerAdmin h1 {
+    margin: 0;
+    padding: 0;
+  }
