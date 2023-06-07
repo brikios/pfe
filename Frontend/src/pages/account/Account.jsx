@@ -38,6 +38,17 @@ const Account = () => {
         }
       },[])
       
+      const createConversation=()=>{
+        navigate('/messages')
+        try{
+        axios.post('http://localhost:8800/conversation/newConversation',{
+          senderId:user._id,
+          receiverId:userId
+        })
+      }catch(err){
+        console.log(err)
+      }
+    }
   return (
     <div>
         <Navbar />
@@ -56,7 +67,7 @@ const Account = () => {
           <p>150</p>
         </div>
       </div>
-      {!sameUser ?<><button className='contactBtn'>راسل</button><br /><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
+      {!sameUser ?<><button onClick={()=>createConversation()} className='contactBtn'>راسل</button><br /><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
       {sameUser ?<>
       <button className='btnAdd' onClick={()=>setOpenAddPropertyPopUp(true)}>
     <span>أضف ملكية</span>

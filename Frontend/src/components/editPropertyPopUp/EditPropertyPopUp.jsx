@@ -13,25 +13,54 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
     const [typeProp,setTypeProp] = useState('')
     const [city,setCity] = useState('')
     const [price,setPrice] = useState(null)
+    const [adress,setAdress]=useState('')
     
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    }
+    
     const{data,error,refresh}=useFetch(`http://localhost:8800/property/get/${propertyId}`)
+    const handleEditProp = async (e, id) => {
+      
+      const updatedData = {};
+    
+      if (title !== '') {
+        updatedData.title = title;
+      }
+      if (description !== '') {
+        updatedData.description = description;
+      }
+      if (typeProp !== '') {
+        updatedData.type = typeProp;
+      }
+      if (city !== '') {
+        updatedData.city = city;
+      }
+      if (price !== null) {
+        updatedData.price = price;
+      }
+      if (adress !== '') {
+        updatedData.adress = adress;
+      }
+    
+      try {
+        await axios.put(`http://localhost:8800/property/update/${id}`, updatedData);
+        console.log("done");
+      } catch (err) {
+        console.log(err);
+      }
+    };
   return (
     <div className='popUp'>
     <div className="Pcontainer">
         
-        <form className='formul'>
+        <form className='formul' onSubmit={(e)=>handleEditProp(e, propertyId)}>
         <FontAwesomeIcon icon={faCircleXmark}
                 className='iconXmark'
                 onClick={()=>setOpenEditPropertyPopUp(false)} 
                 />
           <p className='parag'>   لتعديل ملكية يجب عليك ملء هذه الاستمارة</p>
           <label className='lab'>إسم الملكية</label>
-          <input type='text' className='inp' defaultValue={data.title} onChange={(e) => setTitle(e.target.value)}/>
+          <input type='text' className='inp' defaultValue={data.title} onChange={(e) => setTitle(e.target.defaultValue)}/>
             <label className='lab'>إختر نوع العقار</label>
-                <select className='slct'  onChange={(e)=>setTypeProp(e.target.value)}>
+                <select className='slct' onChange={(e)=>setTypeProp(e.target.value)}>
                     <option className='opt' disabled > نوع العقار</option>
                 {propTypes.map((getProp) =>{
             return(
@@ -41,7 +70,7 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
                 </select>
            
           <label className='lab'>إحتر الولاية</label>
-          <select className='slct' onChange={(e)=>setCity(e.target.value)}>
+          <select className='slct' defaultValue={data.city} onChange={(e)=>setCity(e.target.value)}>
                     <option className='opt' disabled selected> الولاية </option>
                 {Citiest.map((city) =>{
             return(
@@ -49,7 +78,8 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
                     )
                 })}
                 </select>
-          
+                <label className='lab'>عنوان</label>
+          <input className='inp'  type='text' defaultValue={data.adress} onChange={(e)=>setAdress(e.target.value)} />
           <label className='lab'>مبلغ الإيجار الشهري</label>
           <input className='inp'  type='number' defaultValue={data.price} onChange={(e)=>setPrice(e.target.value)} />
           <label className='lab'>اضف التفاصيل هنا</label>

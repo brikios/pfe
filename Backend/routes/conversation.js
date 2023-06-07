@@ -4,7 +4,7 @@ import { getConversationByUserId, newConv, newConversation } from "../controller
 import { verifyToken, verifyTokenContract, verifyUser } from "../middlewares/verifyToken.js";
 const router = express.Router();
 
-router.post('/newConversation',newConversation );
+router.post('/newConversation',newConversation);
 
 router.get('/getConvById/:userId',getConversationByUserId);
 router.post('/newC/:id',verifyToken,newConv);

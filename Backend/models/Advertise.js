@@ -14,10 +14,6 @@ const AdvertiseSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  price: {
-    type: Number,
-    required: true
-  },
   status: {
     type: String,
     enum: ['draft', 'active', 'expired', 'cancelled'],

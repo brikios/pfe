@@ -16,7 +16,6 @@ import { AuthContext } from './context/AuthContext.jsx';
 import PageNotFound from './pages/pageNotFound/PageNotFound.jsx';
 import CookiesPolicies from './pages/cookiesPolicies/CookiesPolicies.jsx';
 import Banned from './pages/banned/Banned.jsx';
-import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 
 function App() {
   const { user } = useContext(AuthContext);

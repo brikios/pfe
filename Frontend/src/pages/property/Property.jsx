@@ -128,7 +128,7 @@ const property = () =>{
                     <h1 className="propertyTitle">{data.name}</h1>
                     <div className="propertyAdress">
                         <FontAwesomeIcon icon={faLocationDot} />
-                        <span>{data.adress}</span>
+                        <span>{data.adress} ، {data.city}</span>
                     </div>
                     <span className="propertySubTitle">إحجز الان بأفضل الأسعار و يمكنك إلغاء الحجز لاحقا</span>
                     
