@@ -10,9 +10,12 @@ import messageRoute from "./routes/message.js"
 import reviewRoute from "./routes/review.js"
 import reportRoute from "./routes/report.js"
 import paymentRoute from "./routes/payment.js";
+import advertiseRoute from "./routes/advertise.js";
+
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import { verifyTokenContract } from "./middlewares/verifyToken.js";
+import { enableCORS } from "./controllers/AdvertiseController.js";
 const app= express();
 
 
@@ -32,6 +35,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 app.use("/auth", authRoute)
+app.use("/advertise", advertiseRoute)
 app.use("/property", propertyRoute)
 app.use("/users", userRoute)
 app.use("/contract",contractRoute)
@@ -43,7 +47,7 @@ app.use("/payment",paymentRoute)
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })
-
+enableCORS(app)
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";

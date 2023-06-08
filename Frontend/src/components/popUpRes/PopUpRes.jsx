@@ -23,6 +23,7 @@ const PopUpRes = ({setOpenPopUp,setShowSuccessPopUp,propertyId,currentUser}) => 
     console.log(error)
   }
   setShowSuccessPopUp(true)
+  setOpenPopUp(false)
   };
   //console.log(data)
   return (

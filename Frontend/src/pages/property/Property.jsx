@@ -17,6 +17,7 @@ import ReportPopUp from "../../components/reportPopUp/ReportPopUp";
 import EditPropertyPopUp from "../../components/editPropertyPopUp/EditPropertyPopUp.JSX";
 import axios from "axios";
 import Comments from "../../components/comments/Comments";
+import AdsPopUp from "../../components/adsPopUp/AdsPopUp";
 
 
   
@@ -34,7 +35,7 @@ const property = () =>{
     const [showSucessPopUp,setShowSuccessPopUp]=useState(false)
     const [openReportPopUp,setOpenReportPopUp]=useState(false)
     const [openEditPropertyPopUp,setOpenEditPropertyPopUp]=useState(false)
-
+    const [openPopUpAds,setOpenPopUpAds]=useState(false);
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -150,7 +151,7 @@ const property = () =>{
                         {sameUser ?(<>
                         
                             <button class="button-56" onClick={()=>setOpenEditPropertyPopUp(true)} role="button">تعديل</button>
-                            <button className="button-56">أشهر هذه الملكية</button>
+                            <button className="button-56" onClick={()=>setOpenPopUpAds(true)}>أشهر هذه الملكية</button>
                             </> )
                             :<div className="propertyDetailsPrice">
                             <h1>للكراء بالشهر أو بالأسبوع</h1>
@@ -197,8 +198,11 @@ const property = () =>{
             
             {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser}/>
             }
+            {openPopUpAds && <AdsPopUp setOpenPopUpAds={setOpenPopUpAds} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} />
+            }
             {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId}/>
             }
+            
             {showSucessPopUp && <SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp} />}
             {openReportPopUp && <ReportPopUp setOpenReportPopUp={setOpenReportPopUp} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId} />}
             {openEditPropertyPopUp && <EditPropertyPopUp setOpenEditPropertyPopUp={setOpenEditPropertyPopUp} propertyId={propertyId} />}
