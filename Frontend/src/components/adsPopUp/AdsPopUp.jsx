@@ -14,7 +14,12 @@ const AdsPopUp = ({ setOpenPopUpAds, setShowSuccessPopUp, propertyId }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate=useNavigate()
   const { user,refreshToken } = useContext(AuthContext);
-
+  useEffect(() => {
+    
+    window.onload = () => {
+      refreshToken(user);
+    };
+  }, []);
   useEffect(() => {
     const start = new Date(startDate);
     const end = new Date(endDate);

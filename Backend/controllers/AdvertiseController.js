@@ -28,6 +28,7 @@ async function updateExpiredAdvertisements(next) {
       next(error)
     }
   }
+  cron.schedule('* * * * *', updateExpiredAdvertisements);
 
   async function updateActivatedAdvertisements(next) {
     try {

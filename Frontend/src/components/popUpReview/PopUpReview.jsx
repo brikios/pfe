@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,21 +6,25 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './popUpReview.css'
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 const PopUpReview = ({setOpenPopUpReview,setShowSuccessPopUp,propertyId,currentUser}) => {
     const [rating, setRating] = useState(0)
     const [reviewText, setReviewText] = useState("")
+    const {user,refreshToken}=useContext(AuthContext)
       const handleRating = (rate) => {
         setRating(rate)
       }
       const handleSubmit = async () => {
         console.log(propertyId)
-
+        console.log(rating)
+        console.log(reviewText)
         try{
         axios.post('http://localhost:8800/review/addReview',{
           propertyId: propertyId,
           rating:rating,
           reviewText:reviewText,
         })
+        refreshToken(user)
         //console.log(response.data);;
       }catch(error){
         console.log(error)

@@ -42,7 +42,7 @@ const property = () =>{
     }
     const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
     const {data2,load,err,ref} = useFetch2(`http://localhost:8800/users/get/${data.currentOwner}`)
-    const {user}=useContext(AuthContext);
+    const {user,refreshToken}=useContext(AuthContext);
     useEffect(()=>{
         if(user && !user.isConfirmed){
           navigate('/confirm')
@@ -79,7 +79,7 @@ const property = () =>{
         getReviews()
        
     },[])
-
+    
     const handleUserState=()=>{
        (user) ? setOpenPopUp(true) : navigate('/login') 
     }

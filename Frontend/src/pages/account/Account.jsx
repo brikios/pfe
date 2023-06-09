@@ -22,8 +22,38 @@ const Account = () => {
         const {user} = useContext(AuthContext)
         const {data2,load,err,ref} = useFetch2(`http://localhost:8800/property/getByOwner/${userId}`)
         const {data,loading,error,refresh} = useFetch(`http://localhost:8800/users/get/${userId}`)
-        const {dat,loa,er,refr}=useFetch(`http://localhost:8800/contract/countContract/${userId}`)
-        
+        const [propertyCountByUser,setPropertyCountByUser]=useState(null)
+        const [contractCount,setContractCount]=useState(null)
+        useEffect(() => {
+          const fetchContractCount = async () => {
+            try {
+              const response = await axios.get(`http://localhost:8800/contract/countContract/${userId}`);
+              setContractCount(response.data);
+
+            } catch (error) {
+              console.log(error);
+            }
+          };
+      
+          fetchContractCount();
+        }, [userId]);
+
+        useEffect(() => {
+          const fetchPropertyCount = async () => {
+            try {
+              const response = await axios.get(`http://localhost:8800/property/getByOwner/${userId}`);
+              setPropertyCountByUser(response.data.length);
+
+            } catch (error) {
+              console.log(error);
+            }
+          };
+      
+          fetchPropertyCount();
+        }, [userId]);
+
+
+
         const navigate=useNavigate()
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
@@ -60,11 +90,11 @@ const Account = () => {
         
         <div>
           <h3>ملكية</h3>
-          <p>123</p>
+          <p>{propertyCountByUser}</p>
         </div>
         <div>
           <h3>عملية كراء</h3>
-          <p>150</p>
+          <p>{contractCount?.sumContract}</p>
         </div>
       </div>
       {!sameUser ?<><button onClick={()=>createConversation()} className='contactBtn'>راسل</button><br /><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}

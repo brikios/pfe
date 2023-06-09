@@ -1,8 +1,9 @@
-
+//import cron from 'node-cron'
 import Property from '../models/Property.js';
 import Contract from '../models/Contract.js';
 import { calculateTotalPrice } from '../utils/ContractUtils.js';
 import Cookies from 'js-cookie';
+
 //import { verif } from '../middlewares/verifyToken.js';
 
 
@@ -32,6 +33,22 @@ export const addContract = async (req, res, next) => {
     await contract.save();
     res.status(201).send(contract);
   };
+  export const updateContract = async(req,res)=>{
+    try{
+        
+        const updatedProperty = await Contract.findByIdAndUpdate(req.params.id, { $set: req.body},{new:true});
+        
+        res.status(200).json(updatedProperty);
+    }catch(err){
+        res.status(500).json(err) 
+    }
+}
+
+
+
+
+
+
 
 
   export const countContractsByOwner = async(req,res,next)=>{
@@ -46,7 +63,7 @@ export const addContract = async (req, res, next) => {
 
 export const getContractByOwner = async (req,res,next)=>{
   try{
-    const ContractOwner = await Contract.find({owner:req.params.id}).populate('client').populate('propertyId')
+    const ContractOwner = await Contract.find({owner:req.params.id}).populate('client').populate('owner').populate('propertyId')
     res.status(200).json(ContractOwner)
   }catch(err){
     next(err)
@@ -61,3 +78,15 @@ export const getContractByClient = async (req,res,next)=>{
     next(err)
   }
 }
+
+async function updateExpiredContracts(next) {
+  try {
+    await Contract.updateMany(
+      { endDate: { $lte: new Date() }, status: { $eq: 'accepted' } },
+      { $set: { status: 'expired' } }
+    );
+  } catch (error) {
+    next(error)
+  }
+}
+setTimeout(updateExpiredContracts, 60000);

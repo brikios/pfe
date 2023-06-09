@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext.jsx';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Home from './pages/home/Home.jsx';
 import Properties from './pages/properties/Properties.jsx';
 import Property from './pages/property/Property.jsx';
@@ -18,8 +18,12 @@ import CookiesPolicies from './pages/cookiesPolicies/CookiesPolicies.jsx';
 import Banned from './pages/banned/Banned.jsx';
 
 function App() {
-  const { user } = useContext(AuthContext);
-
+  const { user,refreshToken } = useContext(AuthContext);
+  useEffect(() => {
+    window.onload = () => {
+      refreshToken(user);
+    };
+  }, []);
   return (
     <AuthContextProvider>
       <Router>

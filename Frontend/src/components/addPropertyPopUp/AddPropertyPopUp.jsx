@@ -14,6 +14,8 @@ const AddPropertyPopUp = ({setOpenAddPropertyPopUp,currentUser}) => {
     const [images, setImages] = useState([]);
     const [price,setPrice] = useState(null)
     
+    
+    
     const handleImageChange = (e) => {
       const files = e.target.files;
       const formData = new FormData();
@@ -22,29 +24,27 @@ const AddPropertyPopUp = ({setOpenAddPropertyPopUp,currentUser}) => {
       }
       setImages(formData);
     };
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        const data = {
-          title: title,
-          description: description,
-          price: price,
-          type: typeProp,
-          city: city,
-        };
-        const config = {
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const data = new FormData();
+      data.append('title', title);
+      data.append('description', description);
+      data.append('type', typeProp);
+      data.append('city', city);
+      data.append('images', images);
+      data.append('price', price);
+  
+      try {
+        await axios.post('http://localhost:8800/property/add', data, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        };
-        data.images = images;       
-        console.log(data)
-        try {
-          await axios.post('http://localhost:8800/property/add', data, config);
-          //console.log('success');
-        } catch (error) {
-          console.error(error);
-        }
-      };
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
   return (
     <div className='popUp'>
     <div className="Pcontainer">
