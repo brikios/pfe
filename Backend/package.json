@@ -36,6 +36,7 @@
     "nookies": "^2.5.2",
     "path": "^0.12.7",
     "safe-buffer": "^5.2.1",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "websocket": "^1.0.34"
   }
 }

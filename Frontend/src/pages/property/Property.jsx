@@ -43,6 +43,10 @@ const property = () =>{
     const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
     const {data2,load,err,ref} = useFetch2(`http://localhost:8800/users/get/${data.currentOwner}`)
     const {user,refreshToken}=useContext(AuthContext);
+
+    const [socket,setSocket]=useState(null)
+
+    
     useEffect(()=>{
         if(user && !user.isConfirmed){
           navigate('/confirm')
@@ -108,7 +112,7 @@ const property = () =>{
 
     return(
         <div>
-            <Navbar />
+            <Navbar socket={socket} />
             {useEffect(()=>{
         document.title=`${data.adress}`
     },[])}
@@ -196,7 +200,7 @@ const property = () =>{
                            
             </div>)}
             
-            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser}/>
+            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser} socket={socket}/>
             }
             {openPopUpAds && <AdsPopUp setOpenPopUpAds={setOpenPopUpAds} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} />
             }

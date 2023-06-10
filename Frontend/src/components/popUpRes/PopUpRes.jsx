@@ -1,15 +1,19 @@
 import { faCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { addContract } from '../../../../Backend/controllers/DemandController'
 import './PopUpRes.css'
 import useFetch from '../../hooks/useFetch'
 import axios from 'axios'
-const PopUpRes = ({setOpenPopUp,setShowSuccessPopUp,propertyId,currentUser}) => {
+import { AuthContext } from '../../context/AuthContext'
+import { io } from 'socket.io-client'
+const PopUpRes = ({setOpenPopUp,setShowSuccessPopUp,propertyId,currentUser,senderName,socket}) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
+  const {user}=useContext(AuthContext)
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try{
@@ -18,7 +22,9 @@ const PopUpRes = ({setOpenPopUp,setShowSuccessPopUp,propertyId,currentUser}) => 
       startDate:startDate,
       endDate:endDate,
     })
-    //console.log(response.data);;
+
+   
+  
   }catch(error){
     console.log(error)
   }

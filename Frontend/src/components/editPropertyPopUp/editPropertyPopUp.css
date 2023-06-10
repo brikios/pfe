@@ -110,7 +110,18 @@
     transition: all 0.3s ease-in-out;
     margin-top: 20px;
   }
-  
+  .btndel {
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fc0a1e;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+  }
   .btnSub:hover {
     background-color: #2bcc33be;
   }

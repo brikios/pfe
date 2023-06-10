@@ -1,24 +1,15 @@
 import Property from '../models/Property.js';
-import upload from '../utils/UploadImages.js';
-import cloudinary from 'cloudinary';
+
 export const createProperty = async (req, res, next) => {
-    const { title, description, price, city, type } = req.body;
-  
+    const { title, description, price, city, type,images } = req.body;
     try {
-      const uploadedImages = [];
-  
-      for (const file of req.files) {
-        const result = await cloudinary.v2.uploader.upload(file.path);
-        uploadedImages.push(result.secure_url);
-      }
-  
       const newProperty = new Property({
         title: title,
         description: description,
         price: price,
         city: city,
         type: type,
-        images: uploadedImages,
+        images: images,
         currentOwner: req.user.id,
       });
   

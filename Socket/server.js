@@ -18,23 +18,29 @@ const io = require("socket.io")(8900, {
   const getUser = (userId) => {
     return users.find((user) => user.userId == userId);
   };
-  
+    
   io.on("connection", (socket) => {
     console.log("User connected");
-  
     socket.on("addUser", (userId) => {
       addUser(userId, socket.id);
       io.emit("getUsers", users);
     });
   
-    socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    socket.on('sendMessage', ({ senderId, receiverId, text }) => {
       const user = getUser(receiverId);
-      io.to(user.socketId).emit("getMessage", {
-        senderId,
-        text,
-      });
+      console.log(user); // Add this line to check the user object
+      if (user) {
+        console.log(user.socketId); // Add this line to check the socketId
+        io.to(user.socketId).emit('getMessage', {
+          senderId,
+          text,
+        });
+      } else {
+        console.log('User not found'); // Add this line to check if the user is not found
+      }
     });
-  
+    
+    
     socket.on("disconnect", () => {
       console.log("User disconnected");
       removeUser(socket.id);

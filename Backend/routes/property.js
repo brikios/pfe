@@ -19,7 +19,7 @@ import { verifyToken, verifyTokenContract, verifyUser } from "../middlewares/ver
 const router = express.Router();
 
 //ADD PROPERTY
-router.post("/add",verifyTokenContract,upload.array('images'),createProperty) 
+router.post("/add",verifyTokenContract,createProperty) 
 //UPDATE PROPERTY
 router.put("/update/:id",updatedProperty)
 

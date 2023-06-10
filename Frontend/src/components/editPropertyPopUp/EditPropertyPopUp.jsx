@@ -1,12 +1,14 @@
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './editPropertyPopUp.css'
 import TextareaAutosize from '@mui/base/TextareaAutosize/TextareaAutosize';
 import propTypes from './../../../../Data/propTypes.json'
 import Citiest from './../../../../Data/gov.json'
 import axios from 'axios'
 import useFetch from '../../hooks/useFetch';
+import { AuthContext } from '../../context/AuthContext';
 const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -14,8 +16,8 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
     const [city,setCity] = useState('')
     const [price,setPrice] = useState(null)
     const [adress,setAdress]=useState('')
-    
-    
+    const{user}=useContext(AuthContext)
+    const navigate=useNavigate();
     const{data,error,refresh}=useFetch(`http://localhost:8800/property/get/${propertyId}`)
     const handleEditProp = async (e, id) => {
       
@@ -42,11 +44,24 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
     
       try {
         await axios.put(`http://localhost:8800/property/update/${id}`, updatedData);
+        window.location.reload();
         console.log("done");
       } catch (err) {
         console.log(err);
       }
     };
+
+    const handleDelete=async(e)=>{
+      e.preventDefault()
+      console.log(propertyId)
+      try{
+        await axios.delete(`http://localhost:8800/property/delete/${propertyId}`);
+        navigate(`/account/${user._id}`)
+      }catch(err)
+      {
+        console.log(err)
+      }
+    }
   return (
     <div className='popUp'>
     <div className="Pcontainer">
@@ -87,6 +102,7 @@ const EditPropertyPopUp = ({setOpenEditPropertyPopUp,propertyId}) => {
             
             
             <button className='btnSub' type="submit" >عدّل</button>
+            <button className='btndel' onClick={handleDelete} >إحذف</button>
           </form>
     </div>
 </div>

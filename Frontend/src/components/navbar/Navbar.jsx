@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faMessage } from '@fortawesome/free-solid-svg-icons'
-export const Navbar = () => {
+export const Navbar = ({socket}) => {
   const navigate =useNavigate()
   const handleNavigate=(path)=>{
     navigate(path)
   }
   const{user}=useContext(AuthContext)
+ 
   
   return (
     <div className='navbar'>
@@ -17,7 +18,11 @@ export const Navbar = () => {
           <span className='logo' onClick={()=>handleNavigate('/')}>داري</span>
            {user ? (<><div className='mesNotif'>
                       <FontAwesomeIcon className='ico' icon={faBell} />
+                      <div className='counter'>2</div>
+                      </div>
+                      <div className='notif'>
                       <FontAwesomeIcon className='ico' icon={faMessage} onClick={()=>navigate('/messages')}/>
+                      <div className='counter'>2</div>
                       </div>
                         <div className="dropdown">          
                         <img className='profile-photo' src={user.img} alt="" />

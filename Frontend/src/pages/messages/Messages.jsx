@@ -32,9 +32,11 @@ const Messages = () => {
       navigate('/login');
     }
   }, []);
-
-  useEffect(() => {
+  useEffect(()=>{
     socket.current = io("ws://localhost:8900");
+  },[])
+  useEffect(() => {
+    
   
     socket.current.off("getMessage");
     
@@ -90,24 +92,34 @@ const Messages = () => {
         console.log(err);
       }
     };
-    
+
       getMessages();
     
   }, [chat]);
 
-  const handleSendMsg = async (e) => {
-    e.preventDefault();
-    const message = {
-      conversationId: chat._id,
-      sender: user._id,
-      text: newMsg,
-    };
-    const receiverId = chat.members.find((member) => member !== user.id);
+ const handleSendMsg = async (e) => {
+  e.preventDefault();
+  if (!chat) {
+    console.log('No active conversation');
+    return;
+  }
+
+  const message = {
+    conversationId: chat._id,
+    sender: user._id,
+    text: newMsg,
+  };
+  const receiverId = chat.members.find((member) => member !== user._id);
+  console.log('Receiver ID:', receiverId);
+  console.log('Message:', message);
+
+  if (receiverId) {
     socket.current.emit('sendMessage', {
       senderId: user._id,
       receiverId: receiverId,
       text: newMsg,
     });
+
     try {
       const res = await axios.post(
         `http://localhost:8800/message/addMsg/`,
@@ -118,8 +130,11 @@ const Messages = () => {
     } catch (err) {
       console.log(err);
     }
-    
-  };
+  } else {
+    console.log('Receiver ID not found');
+  }
+};
+
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
