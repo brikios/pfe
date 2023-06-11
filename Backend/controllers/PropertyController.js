@@ -26,7 +26,7 @@ export const createProperty = async (req, res, next) => {
 //GET PROPERTY OWNER
 export const getPropertyByOwner = async (req,res)=>{
     try{
-        const getProperty = await Property.find({currentOwner : req.params.id});
+        const getProperty = await Property.find({currentOwner : req.params.id });
         res.status(200).json(getProperty);
     }catch(err){
         res.status(500).json(err) 
@@ -60,7 +60,9 @@ export const deleteProperty = async(req,res)=>{
 //GET ALL PROPERTiet
 export const getAllProperties = async(req,res)=>{
     try{
-        const properties=await Property.find().populate('currentOwner');
+        const properties = await Property.find({
+            'currentOwner.Banned': { $ne: true },
+          }).populate('currentOwner');
          res.status(200).json(properties);
      }catch(err){
          res.status(500).json(err) 

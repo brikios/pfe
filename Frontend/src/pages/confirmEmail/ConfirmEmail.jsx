@@ -3,9 +3,12 @@ import { Navbar } from '../../components/navbar/Navbar'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
 import './ConfirmEmail.css'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 const ConfirmEmail = () => {
   const [confirmationCode,setConfirmationCode]=useState('')
   const {user,refreshToken}=useContext(AuthContext)
+  const navigate=useNavigate()
   const handleSubmit= async(e)=>{
     e.preventDefault()
     try{
@@ -13,11 +16,17 @@ const ConfirmEmail = () => {
         email:user.email,
         confirmationCode:confirmationCode
       })
-      refreshToken(user);
+      await refreshToken(user);
+      navigate('/')
     }catch(err){
       console.log(err)
     }
   }
+  useEffect(()=>{
+    if(user && !user.Banned){
+      navigate('/Banned')
+    }
+  },[])
   return (
     <div><Navbar />
     <div className='center-container'>

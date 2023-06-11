@@ -19,6 +19,7 @@ const Registre = () => {
                 password:password,
                 phone:phone
             })
+            navigate('/login')
         }catch(err){
             console.log(err)
         }

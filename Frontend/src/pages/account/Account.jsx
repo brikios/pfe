@@ -13,6 +13,8 @@ import AddPropertyPopUp from '../../components/addPropertyPopUp/AddPropertyPopUp
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import EditeAccount from '../../components/editAccount/EditeAccount';
+import ReportUserPopUp from '../../components/reportUserPopUp/ReportUserPopUp';
+import SuccessPopUp from '../../successPopUp/SuccessPopUp';
 
 
 
@@ -26,6 +28,8 @@ const Account = () => {
         const [propertyCountByUser,setPropertyCountByUser]=useState(null)
         const [contractCount,setContractCount]=useState(null)
         const [openEditAccountPopUp,setOpenEditAccountPopUp]=useState(false)
+        const [openReportPopUp,setOpenReportPopUp]=useState(false)
+        const [showSuccessPopUp,setShowSuccessPopUp]=useState(false)
         useEffect(() => {
           const fetchContractCount = async () => {
             try {
@@ -54,7 +58,11 @@ const Account = () => {
           fetchPropertyCount();
         }, [userId]);
 
-
+        useEffect(()=>{
+          if(user && user.Banned){
+            navigate('/Banned')
+          }
+        },[])
 
         const navigate=useNavigate()
         useEffect(()=>{
@@ -99,7 +107,7 @@ const Account = () => {
           <p>{contractCount?.sumContract}</p>
         </div>
       </div>
-      {!sameUser ?<><button onClick={()=>createConversation()} className='contactBtn'>راسل</button><br /><a className='reportButtonAccount'> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
+      {!sameUser ?<><button onClick={()=>createConversation()} className='contactBtn'>راسل</button><br /><a className='reportButtonAccount' onClick={()=>setOpenReportPopUp(true)}> <FontAwesomeIcon icon={faExclamationTriangle}/> تبليغ عن مستخدم</a></> :<></>}
       {sameUser ?<>
       <button className='btnAdd' onClick={()=>setOpenAddPropertyPopUp(true)}>
     <span>أضف ملكية</span>
@@ -131,7 +139,9 @@ const Account = () => {
               )})
     }
     </div>
+    {showSuccessPopUp && <SuccessPopUp setShowSuccessPopUp={setShowSuccessPopUp} />}
     {openAddPropertyPopUp && <AddPropertyPopUp setOpenAddPropertyPopUp={setOpenAddPropertyPopUp} currentUser={user._id} />}
+    {openReportPopUp && <ReportUserPopUp setOpenReportPopUp={setOpenReportPopUp} setShowSuccessPopUp={setShowSuccessPopUp} currentUser={userId} />}
     {openEditAccountPopUp && <EditeAccount setOpenEditAccountPopUp={setOpenEditAccountPopUp} currentUser={user._id} />}
     </div>
     

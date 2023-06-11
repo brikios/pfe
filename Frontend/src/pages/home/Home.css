@@ -29,3 +29,23 @@
     justify-content: center;
     align-items: center;
   }
+
+  .divCard{
+    position: relative;
+  }
+
+  .iconCard{
+    position: absolute;
+    z-index: 999;
+    color: white;
+    top: 5px;
+    right: 230px;
+    cursor: pointer;
+  }
+
+  .iconCard:hover{
+    color: yellow;
+  }
+  .iconCard:active{
+    color: yellow;
+  }

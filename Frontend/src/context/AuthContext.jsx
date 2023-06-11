@@ -20,8 +20,9 @@ const AuthReducer = (state, action) => {
       };
     case "LOGIN_SUCCESS":
       const token = action.payload.token;
-      
-      Cookies.set('access_token', action.payload.token);
+      const tokenExpiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 24); 
+
+      Cookies.set('access_token', token, { expires: tokenExpiration });
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       return {
         user: action.payload.user,
@@ -40,18 +41,25 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: null,
       };
-      case "REFRESH_TOKEN":
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            token: action.payload,
-          },
-        };
-      default:
-        return state;
-    }
+    case "REFRESH_TOKEN":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          token: action.payload,
+        },
+      };
+    case "REGISTER":
+      return {
+        user: action.payload.user,
+        loading: false,
+        error: null,
+      };
+    default:
+      return state;
+  }
 };
+
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);

@@ -44,14 +44,20 @@ cron.schedule('* * * * *', updateActivatedAdvertisements);
 
 
 
-  export const getAdvertise= async (req, res, next) => {
-    try {
-      const advertise = await Advertise.find();
-      res.status(200).json(advertise);
-    } catch (err) {
-      next(err);
-    }
-  };
+export const getAdvertise = async (req, res, next) => {
+  try {
+    const advertise = await Advertise.find({ status: "active" }).populate({
+      path: "propertyId",
+      populate: {
+        path: "currentOwner",
+        model: "User", 
+      },
+    });
+    res.status(200).json(advertise);
+  } catch (err) {
+    next(err);
+  }
+};
   export const enableCORS = (app) => {
     app.use(cors());
   };

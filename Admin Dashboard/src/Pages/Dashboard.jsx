@@ -5,13 +5,14 @@ import Stats from '../Components/Stats/Stats'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartGantt, faPaperPlane, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons'
 import Users from '../Components/Users/Users'
+import Reports from '../Components/reports/Reports'
 const Dashboard = () => {
     const [state,setState]=useState("dashboard")
   return (
     <div className='body'>
     <div className="containerAdmin">
         <Navbar />
-        {state=="dashboard" ?<Stats />:<Users />}
+        {state=="dashboard" ? (<Stats />) : (state=="users"? <Users />:<Reports />)}
         <div className="footer">
             <div className="sidebar">
                 <ul>

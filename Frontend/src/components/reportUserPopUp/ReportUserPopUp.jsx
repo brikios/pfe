@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
-import repProp from '../../../../Data/reportProperty.json';
+import repProp from '../../../../Data/reportPerson.json';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from '@mui/base/TextareaAutosize/TextareaAutosize';
-
-const ReportPopUp = ({setOpenReportPopUp,setShowSuccessPopUp,propertyId,currentUser}) => {
+import './reportUserPopUp.css'
+const ReportUserPopUp = ({setOpenReportPopUp,setShowSuccessPopUp,currentUser}) => {
     const [repCase,setRepCase]=useState('')
     const [repCaseText,setRepCaseText]=useState('')
     const handleSubmit=()=>{
     try{
         axios.post('http://localhost:8800/report/addreport',{
-          propertyId: propertyId,
+          userReported: currentUser,
           reason:repCase,
-          reportType:"property",
+          reportType:"user",
           description:repCaseText,
 
         })
@@ -60,4 +60,4 @@ const ReportPopUp = ({setOpenReportPopUp,setShowSuccessPopUp,propertyId,currentU
   )
 }
 
-export default ReportPopUp
+export default ReportUserPopUp

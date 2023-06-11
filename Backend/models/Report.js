@@ -11,7 +11,10 @@ const ReportSchema = new mongoose.Schema({
   property: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Property",
-    required: true,
+  },
+  userReported: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   reason: {
     type: String,
@@ -19,6 +22,11 @@ const ReportSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: true,
+  },
+  reportType: {
+    type: String,
+    enum:["user","property"],
     required: true,
   },
   status:{

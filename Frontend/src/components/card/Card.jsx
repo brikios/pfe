@@ -9,7 +9,7 @@ export default function Card (props){
     return (
         
         <div className="card">
-             <div className="card--badge"><FontAwesomeIcon className="icon" icon={faBookmark } /></div>
+            
             <img src={props.img} className="card--image" />
             <p className="card--title">{props.title}</p>
             <div className="card--stats">

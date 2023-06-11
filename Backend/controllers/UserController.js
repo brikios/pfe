@@ -13,7 +13,14 @@ export const updateUser = async(req,res)=>{
 
 export const updateUserAdsToken= async(req,res,next)=>{
     try{
-        const updatedUserAdsToken = await User.findByIdAndUpdate(req.params.id,{ $set :{adsTokens:req.body.adsTokens}},{new:true})
+        const user = await User.findById(req.params.id);
+
+            if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+            }
+            const newAdsToken = req.body.adsTokens;
+
+        const updatedUserAdsToken = await User.findByIdAndUpdate(req.params.id,{ $set :{adsTokens:user.adsTokens+newAdsToken}},{new:true})
        
         res.status(200).json(updatedUserAdsToken)
     }catch(err){

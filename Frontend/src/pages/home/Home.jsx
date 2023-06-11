@@ -20,6 +20,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { EmblaCarousel } from "../../components/emblaCarousel/EmblaCarousel";
 import AdsCard from "../../components/adsCard/AdsCard";
 import useFetch from "../../hooks/useFetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 
 const LIMIT = 8;
@@ -65,14 +67,33 @@ const {user}=useContext(AuthContext)
     }
     
   },[])
-  const addAdsTokens=(number)=>{
+  useEffect(()=>{
+    if(user && user.Banned){
+      navigate('/Banned')
+    }
+  },[])
+  const updateRevnue=(revnue)=>{
     try{
-    axios.put(`http://localhost:8800/users/updateUserAdsToken/${user._id}`,{
-      adsTokens:number
-    })}catch(err){
+      axios.put('http://localhost:8800/admin/update',{
+        userName:"brikios",
+        revenue:revnue
+      })
+    }catch(err){
       console.log(err)
     }
   }
+  const addAdsTokens=(number,money)=>{
+    try{
+    axios.put(`http://localhost:8800/users/updateUserAdsToken/${user._id}`,{
+      adsTokens:number
+    }
+    )
+    updateRevnue(money)
+  }catch(err){
+      console.log(err)
+    }
+  }
+ 
   const handleNavigate=(propId)=>{
     navigate(`property/${propId}`)
   }
@@ -93,11 +114,11 @@ const {user}=useContext(AuthContext)
           setShowSuccessPopUp(true);
           setResult('');
           if (searchParams.get("amount")=="30000") {
-            addAdsTokens(1);
+            addAdsTokens(1,30);
           } else if (searchParams.get("amount")=="80000") {
-            addAdsTokens(3);
+            addAdsTokens(3,80);
           } else if (searchParams.get("amount")=="180000") {
-            addAdsTokens(7);
+            addAdsTokens(7,180);
           }
           setSearchParams(new URLSearchParams());
           const disableBackNavigation = (event) => {
@@ -114,7 +135,12 @@ const {user}=useContext(AuthContext)
         }
       }, [result, searchParams, setSearchParams]);
 
-    
+    const handleAddWishlist=async(propteryId)=>{
+      await axios.put("http://localhost:8800/wishlist/add",{
+        clientId:user._id,
+        propertyId:propteryId,
+      })
+    }
       
 
     
@@ -143,7 +169,8 @@ const {user}=useContext(AuthContext)
                     
                 >
                     {properties?.map((Property,index)=>(
-                     
+                     <div className="divCard">
+                       
                     <a onClick={()=>handleNavigate(Property._id)} >  
                                       
                     <Card
@@ -155,9 +182,9 @@ const {user}=useContext(AuthContext)
                       price={Property.price} 
                       totalRating={Property.ratingCount}
                      />
-                     
                      </a> 
-                     
+                     <FontAwesomeIcon className="iconCard" onClick={()=>handleAddWishlist(Property._id)} icon={faBookmark } />
+                     </div>
                 ))
                 }</InfiniteScroll>
             </div>

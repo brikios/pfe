@@ -15,6 +15,11 @@ const Package = () => {
       }
     },[])
     useEffect(()=>{
+      if(user && user.Banned){
+        navigate('/Banned')
+      }
+    },[])
+    useEffect(()=>{
       if(user==null){
         navigate('/login')
       }

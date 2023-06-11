@@ -7,6 +7,11 @@ const PageNotFound = () => {
   useEffect(()=>{
     document.title="صفحة غير موجودة"
   })
+  useEffect(()=>{
+    if(user && user.Banned){
+      navigate('/Banned')
+    }
+  },[])
   const navigate=useNavigate();
   return (
     <div>

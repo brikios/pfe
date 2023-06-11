@@ -47,7 +47,14 @@ export const addContract = async (req, res, next) => {
 
 
 
-
+export const getDatesContract = async(req,res,next)=>{
+  try{
+    const getDatesContracts = await Contract.find({propertyId:req.params.id})
+    res.status(200).json(getDatesContracts)
+  }catch(err){
+    next(err)
+  }
+}
 
 
 
@@ -59,6 +66,15 @@ export const addContract = async (req, res, next) => {
     }catch(err){
         next(err)
     }
+}
+
+export const getContracts = async(req,res)=>{
+  try{
+      const getAllContract = await Contract.find();
+      res.status(200).json(getAllContract);
+  }catch(err){
+      res.status(500).json(err) 
+  }
 }
 
 export const getContractByOwner = async (req,res,next)=>{

@@ -3,7 +3,7 @@ import { Navbar } from "../../components/navbar/Navbar";
 import { Header } from "../../components/header/Header";
 import './property.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark,  faExclamationTriangle,  faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faCircleArrowLeft, faCircleArrowRight, faCircleXmark,  faExclamationTriangle,  faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import useFetch from './../../hooks/useFetch.js'
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -50,6 +50,11 @@ const property = () =>{
     useEffect(()=>{
         if(user && !user.isConfirmed){
           navigate('/confirm')
+        }
+      },[])
+      useEffect(()=>{
+        if(user && user.Banned){
+          navigate('/Banned')
         }
       },[])
       
@@ -109,7 +114,12 @@ const property = () =>{
     }else{
         navigate('/login')
     }}
-
+    const handleAddWishlist=async(propteryId)=>{
+        await axios.put("http://localhost:8800/wishlist/add",{
+          clientId:user._id,
+          propertyId:propteryId,
+        })
+      }
     return(
         <div>
             <Navbar socket={socket} />
@@ -147,7 +157,9 @@ const property = () =>{
                     </div>
                     <div className="propertyDetails">
                         <div className="propertyDetailText">
-                        <button className="reportBtn" onClick={handleUserStateReport} ><FontAwesomeIcon icon={faExclamationTriangle} /> تبليغ عن الملكية</button>
+                        <button className="reportBtn" onClick={handleUserStateReport} ><FontAwesomeIcon icon={faExclamationTriangle} /> تبليغ عن الملكية</button><br/>
+                        <button className="wishBtn" onClick={()=>handleAddWishlist(propertyId)} ><FontAwesomeIcon icon={faBookmark} /> أضف إلي قائمة المفضلات</button>
+
                             <h1 className="propertyDescTitle">{data.title}</h1>
                             <p className="propertyDesc">{data.description}</p>
                             

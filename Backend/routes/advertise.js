@@ -1,7 +1,7 @@
 import express  from "express";
-import { createAdvertise } from "../controllers/AdvertiseController.js";
+import { createAdvertise, getAdvertise } from "../controllers/AdvertiseController.js";
 const router = express.Router();
 
 router.post('/createAd',createAdvertise)
-
+router.get('/getall',getAdvertise)
 export default router

@@ -11,6 +11,8 @@ import reviewRoute from "./routes/review.js"
 import reportRoute from "./routes/report.js"
 import paymentRoute from "./routes/payment.js";
 import advertiseRoute from "./routes/advertise.js";
+import wishlistRoute from "./routes/wishlist.js";
+import adminRoute from "./routes/admin.js";
 
 import cookieParser from "cookie-parser";
 import cors from 'cors'
@@ -44,6 +46,9 @@ app.use("/message",messageRoute)
 app.use("/review",reviewRoute)
 app.use("/report",reportRoute)
 app.use("/payment",paymentRoute)
+app.use("/wishlist",wishlistRoute)
+app.use("/admin",adminRoute)
+
 mongoose.connection.on("connected",()=>{
     console.log("mongodb connected")
 })

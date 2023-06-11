@@ -26,6 +26,11 @@ const Messages = () => {
       navigate('/confirm');
     }
   }, []);
+  useEffect(()=>{
+    if(user && user.Banned){
+      navigate('/Banned')
+    }
+  },[])
 
   useEffect(() => {
     if (user == null) {

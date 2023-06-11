@@ -15,7 +15,11 @@ const Properties = () =>{
           navigate('/confirm')
         }
       },[])
-      
+      useEffect(()=>{
+        if(user && user.Banned){
+          navigate('/Banned')
+        }
+      },[])
     useEffect(()=>{
         document.title='داري - بحث'
     },[])

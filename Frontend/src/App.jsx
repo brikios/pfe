@@ -16,6 +16,7 @@ import { AuthContext } from './context/AuthContext.jsx';
 import PageNotFound from './pages/pageNotFound/PageNotFound.jsx';
 import CookiesPolicies from './pages/cookiesPolicies/CookiesPolicies.jsx';
 import Banned from './pages/banned/Banned.jsx';
+import Wishlist from './pages/wishlist/Wishlist.jsx';
 
 function App() {
   const { user,refreshToken } = useContext(AuthContext);
@@ -24,6 +25,7 @@ function App() {
       refreshToken(user);
     };
   }, []);
+  
   return (
     <AuthContextProvider>
       <Router>
@@ -42,7 +44,7 @@ function App() {
               <Route path='*' element={<PageNotFound />} />
               <Route path='/cookies' element={<CookiesPolicies />}/>
               <Route path='/banned' element={<Banned />} />
-              
+              <Route path='/wishlist' element={<Wishlist />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Registre />} />
         </Routes>

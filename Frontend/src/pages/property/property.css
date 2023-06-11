@@ -223,3 +223,10 @@
     color: red;
     cursor: pointer;
   }
+
+  .wishBtn{
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+  }
