@@ -117,7 +117,7 @@ useEffect(() => {
         </div>
         <div className="stat">
           <FontAwesomeIcon className='font' icon={faAd} /><br />
-          <h2>عمليت إشهار</h2>
+          <h2>عملية إشهار</h2>
           <p>{dataAdvertise}</p>
         </div>
       </div>

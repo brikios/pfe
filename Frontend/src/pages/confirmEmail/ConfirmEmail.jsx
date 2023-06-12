@@ -23,7 +23,7 @@ const ConfirmEmail = () => {
     }
   }
   useEffect(()=>{
-    if(user && !user.Banned){
+    if(user && user.Banned){
       navigate('/Banned')
     }
   },[])

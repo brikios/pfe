@@ -36,6 +36,9 @@ const property = () =>{
     const [openReportPopUp,setOpenReportPopUp]=useState(false)
     const [openEditPropertyPopUp,setOpenEditPropertyPopUp]=useState(false)
     const [openPopUpAds,setOpenPopUpAds]=useState(false);
+    const [userReview, setUserReview] = useState(null);
+    const [hasReviewed, setHasReviewed] = useState(false);
+    const [banned,setBanned]=useState(false)
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
@@ -45,7 +48,7 @@ const property = () =>{
     const {user,refreshToken}=useContext(AuthContext);
 
     const [socket,setSocket]=useState(null)
-
+  
     
     useEffect(()=>{
         if(user && !user.isConfirmed){
@@ -75,19 +78,25 @@ const property = () =>{
             setSlideNumber(newSlideNumber)
     }
     
-    useEffect(()=>{
-        const getReviews=async()=>{
-            try{
-                const response = await axios.get(`http://localhost:8800/review/get/${propertyId}`)
-                setRecords(response.data)
-                //console.log(records)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        getReviews()
-       
-    },[])
+    useEffect(() => {
+        const getReviews = async () => {
+          try {
+            const response = await axios.get(`http://localhost:8800/review/get/${propertyId}`);
+            setRecords(response.data);
+    
+            // Check if the user has already submitted a review
+            const userReview = response.data.find((review) => review.user._id === user?._id);
+            setUserReview(userReview);
+    
+            // Check if the user has reviewed the property
+            setHasReviewed(!!userReview);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        getReviews();
+      }, [propertyId, user?._id]);
     
     const handleUserState=()=>{
        (user) ? setOpenPopUp(true) : navigate('/login') 
@@ -120,6 +129,9 @@ const property = () =>{
           propertyId:propteryId,
         })
       }
+
+      
+      
     return(
         <div>
             <Navbar socket={socket} />
@@ -188,6 +200,8 @@ const property = () =>{
                     phone={data2.phone}
                     email={data2.email}
                     /></a></>}
+                    {data2.Banned & navigate('/userBanned')
+                    }
                     <div className="propertyDetailsPrice1">
                         {records.map((record,index)=>(
                            <div>
@@ -199,6 +213,7 @@ const property = () =>{
                                     rating={record.rating}
                                     comment={record.reviewText}
                                 />     
+                                
                                 <hr/>
                                </div> 
                         ))}
@@ -208,20 +223,46 @@ const property = () =>{
                     </div>
                 </div>
                 
-               {sameUser ? <></> :<button className="btnReview" onClick={handleUserStateReview}>أضف مراجعة</button>}
+               {sameUser ? <></> :!hasReviewed && (
+            <button className="btnReview" onClick={handleUserStateReview}>
+              أضف مراجعة
+            </button>
+          )}
                            
             </div>)}
             
-            {openPopUp && <PopUpRes setOpenPopUp={setOpenPopUp} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} currentUser={currentUser} socket={socket}/>
+            {openPopUp && 
+            <PopUpRes 
+            setOpenPopUp={setOpenPopUp} 
+            setShowSuccessPopUp={setShowSuccessPopUp} 
+             propertyId={propertyId}
+            currentUser={currentUser} 
+            socket={socket}/>
             }
-            {openPopUpAds && <AdsPopUp setOpenPopUpAds={setOpenPopUpAds} setShowSuccessPopUp={setShowSuccessPopUp}  propertyId={propertyId} />
+            {openPopUpAds && 
+            <AdsPopUp setOpenPopUpAds={setOpenPopUpAds} 
+            setShowSuccessPopUp={setShowSuccessPopUp}  
+            propertyId={propertyId} />
             }
-            {openPopUpReview && <PopUpReview setOpenPopUpReview={setOpenPopUpReview} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId}/>
+            {openPopUpReview && 
+            <PopUpReview setOpenPopUpReview={setOpenPopUpReview} 
+            setShowSuccessPopUp={setShowSuccessPopUp} 
+            propertyId={propertyId}/>
             }
             
-            {showSucessPopUp && <SuccessPopUp  setShowSuccessPopUp={setShowSuccessPopUp} />}
-            {openReportPopUp && <ReportPopUp setOpenReportPopUp={setOpenReportPopUp} setShowSuccessPopUp={setShowSuccessPopUp} propertyId={propertyId} />}
-            {openEditPropertyPopUp && <EditPropertyPopUp setOpenEditPropertyPopUp={setOpenEditPropertyPopUp} propertyId={propertyId} />}
+            {showSucessPopUp && 
+            <SuccessPopUp  
+            setShowSuccessPopUp={setShowSuccessPopUp}
+             />}
+            {openReportPopUp && 
+            <ReportPopUp 
+            setOpenReportPopUp={setOpenReportPopUp} 
+            setShowSuccessPopUp={setShowSuccessPopUp} 
+            propertyId={propertyId} />}
+            {openEditPropertyPopUp && 
+            <EditPropertyPopUp 
+            setOpenEditPropertyPopUp={setOpenEditPropertyPopUp} 
+            propertyId={propertyId} />}
         </div>
     )
 }

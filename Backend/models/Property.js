@@ -39,6 +39,10 @@ const PropertySchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+    totalRatingCount:{
+        type:Number,
+        default:0
+    },
     price:{
         type: Number,
         required:true

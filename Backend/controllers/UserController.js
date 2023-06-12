@@ -20,7 +20,7 @@ export const updateUserAdsToken= async(req,res,next)=>{
             }
             const newAdsToken = req.body.adsTokens;
 
-        const updatedUserAdsToken = await User.findByIdAndUpdate(req.params.id,{ $set :{adsTokens:user.adsTokens+newAdsToken}},{new:true})
+        const updatedUserAdsToken = await User.findByIdAndUpdate(req.params.id,{ $set :{adsTokens:user.adsTokens-newAdsToken}},{new:true})
        
         res.status(200).json(updatedUserAdsToken)
     }catch(err){

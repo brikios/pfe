@@ -41,6 +41,17 @@
             console.log(err)
         }
       }
+      const handleDeleteProperty=async (e,id,propId,status)=>{
+        e.preventDefault();
+        try{
+            axios.delete(`http://localhost:8800/property/delete/${propId}`,{
+                Banned:false
+            })
+            await handleReports(e,id,status)
+        }catch(err){
+            console.log(err)
+        }
+      }
     useEffect(() => {
         const fetchData = async () => {
         try {
@@ -60,21 +71,17 @@
             <table className="styled-table">
                 <tr>
                     <td>
-                        إسم 
+            إسم المبلغ
                     </td>   
+                    
                     <td>
-                        لقب
-                    </td>
-                    <td>
-                        هاتف
+                         السبب
                     </td>
                     
                     <td>
-                        الحالة
+                    أكثر تفاصيل
                     </td>
-                    <td>
-                        تغيير
-                    </td>
+                    <td>الحالة</td>
                     <td>
                         قبول التقرير و فسخ الملكية
                     </td>
@@ -88,10 +95,8 @@
                 <td>{item.user.firstName}</td>
                 <td>{item.reason}</td>
                 <td>{item.description}</td>
-                <td>{item.reportType}</td>
-                <td>{item.property?.title}</td>
                 <td>{item.status=="accepted" ?"مقبول":(item.status=="refused"?"غير مقبول":"معلق")}</td>
-            {item.status=="draft" ? <td><button>حضر</button> </td>:<></>}
+            {item.status=="draft" ? <td><button onClick={(e)=>handleDeleteProperty(e,item._id,item.property._id,"accepted")}>فسخ</button> </td>:<></>}
             {item.status=="draft" ?  <td><button onClick={(e)=>handleReports(e,item._id,"refused")}>رفض</button></td>:<></>}
             </tr>
         ))}

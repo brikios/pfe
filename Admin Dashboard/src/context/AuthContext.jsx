@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 
 const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  admin: JSON.parse(localStorage.getItem("admin")) || null,
   loading: false,
   error: null,
 };
@@ -14,7 +14,7 @@ const AuthReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_START":
       return {
-        user: null,
+        admin: null,
         loading: true,
         error: null,
       };
@@ -22,36 +22,36 @@ const AuthReducer = (state, action) => {
       const token = action.payload.token;
       const tokenExpiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 24); 
 
-      Cookies.set('access_token', token, { expires: tokenExpiration });
+      Cookies.set('access_admin_token', token, { expires: tokenExpiration });
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       return {
-        user: action.payload.user,
+        admin: action.payload.admin,
         loading: false,
         error: null,
       };
     case "LOGIN_FAILURE":
       return {
-        user: null,
+        admin: null,
         loading: false,
         error: action.payload,
       };
     case "LOGOUT":
       return {
-        user: null,
+        admin: null,
         loading: false,
         error: null,
       };
     case "REFRESH_TOKEN":
       return {
         ...state,
-        user: {
-          ...state.user,
+        admin: {
+          ...state.admin,
           token: action.payload,
         },
       };
     case "REGISTER":
       return {
-        user: action.payload.user,
+        admin: action.payload.admin,
         loading: false,
         error: null,
       };
@@ -60,42 +60,38 @@ const AuthReducer = (state, action) => {
   }
 };
 
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
-    localStorage.setItem("user",JSON.stringify(state.user))
-    Cookies.set("user", JSON.stringify(state.user));
-  }, [state.user]);
+    localStorage.setItem("admin", JSON.stringify(state.admin));
+    Cookies.set("admin", JSON.stringify(state.admin));
+  }, [state.admin]);
+
   const refreshToken = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
+      const admin = JSON.parse(localStorage.getItem("admin"));
       const res = await axios.post("http://localhost:8800/auth/refresh-token", {
-        userId: user._id, 
+        adminId: admin._id, 
       });
     
-      const { token, user: refreshedUser  } = res.data;
-      localStorage.setItem("user",JSON.stringify(refreshedUser))
-      localStorage.setItem("access_token", token); 
-      Cookies.set("access_token", JSON.stringify(token));
+      const { token, admin: refreshedadmin  } = res.data;
+      localStorage.setItem("admin", JSON.stringify(refreshedadmin));
+      Cookies.set("access_admin_token", JSON.stringify(token));
       
-      dispatch({ type: "LOGIN_SUCCESS", payload: { token, user:refreshedUser } });
+      dispatch({ type: "LOGIN_SUCCESS", payload: { token, admin: refreshedadmin } });
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(()=>{
-    refreshToken()
-  },[])
   return (
     <AuthContext.Provider
       value={{
-        user: state.user,
+        admin: state.admin,
         loading: state.loading,
         error: state.error,
-        dispatch,
+        dispatch: dispatch,
         refreshToken,
       }}
     >

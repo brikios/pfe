@@ -1,4 +1,6 @@
 import User from "../models/User.js";
+import Admin from "../models/Admin.js";
+
 import bcrypt from "bcryptjs";
 import jwt  from "jsonwebtoken";
 import { createError } from "../middlewares/errorHandler.js";
@@ -12,7 +14,7 @@ export const registreUser = async (req,res,next)=>{
     try{
         const isExisting = await User.findOne({email: req.body.email})
         if(isExisting){
-            return next(createError(410,"user already exists"))
+            return next(createError(410,"المستخدم موجود"))
         }
         const confirmationCode = generateConfirmationCode();
 
@@ -91,7 +93,7 @@ export const loginUser = async (req,res,next)=>{
             return res.json({ status: 'error', token: false })
         }
     }catch(error){
-        throw error;
+        return next(createError(404, 'البريد الإلكتروني أو كلمة السر غير صحيحان'));
     }
 }
 
@@ -121,5 +123,45 @@ export const refreshToken = async (req, res, next) => {
   };
 export const logout = (req, res) => {
     res.clearCookie('access_token');
+    res.status(200).json({ message: 'Logout successful' });
+  };
+
+
+
+
+
+export const loginAdmin = async (req,res,next)=>{
+    try{
+        const admin = await Admin.findOne({
+            userName: req.body.userName,
+        })
+    
+        if (!admin) {
+            return { status: 'error', error: 'Invalid login' }
+        }
+    
+        const isPasswordValid = req.body.password == admin.password
+    
+        
+        if (isPasswordValid) {
+            const token = jwt.sign(
+                {
+                    id:admin._id,
+                    userName: admin.userName,
+                },
+                process.env.JWT_SEC
+            )
+            res.cookie("access_admin_token", token);
+            return res.json({ status: 'ok', token: token,admin:admin})
+        } else {
+            return res.json({ status: 'error', token: false })
+        }
+    }catch(error){
+        throw error;
+    }
+}
+
+export const logoutAdmin = (req, res) => {
+    res.clearCookie('access_admin_token');
     res.status(200).json({ message: 'Logout successful' });
   };

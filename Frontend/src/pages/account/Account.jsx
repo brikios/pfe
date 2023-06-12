@@ -91,6 +91,8 @@ const Account = () => {
     }
   return (
     <div>
+      {data.Banned & navigate('/userBanned')
+                    }
         <Navbar />
         <div className="profile">
       <img src={data.img} alt="Profile Picture" />

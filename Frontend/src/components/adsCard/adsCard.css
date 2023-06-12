@@ -7,6 +7,9 @@
   align-items: center;
   margin-top: -100px;
 }
+img{
+  cursor: pointer;
+}
 
 .carouselSlide {
   position: relative;
@@ -25,8 +28,8 @@
 
 .carouselSlide > img {
   position: relative;
-  width: 800px;
-  height: 650px;
+  width: 1024px;
+  height: 100%;
   object-fit: cover;
   margin-bottom: 10px;
   border-radius: 8px;
@@ -44,6 +47,7 @@
   font-size: 12px;
   font-weight: bold;
   margin: 0;
+  z-index: 1;
 }
 
 .carouselSlide h3 {
@@ -90,6 +94,7 @@ text-align: center;
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
+    z-index: 0;
   }
   
   .userImage > div {

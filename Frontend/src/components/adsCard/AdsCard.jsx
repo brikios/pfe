@@ -25,15 +25,17 @@ const AdsCard = () => {
     <div className="carousel">
       <div className="carouselSlide">
         <h4>إشهار</h4>
-        <img src={data[currentIndex]?.propertyId.images[0]} alt="Carousel Image" />
         
+        <img className='imageur' onClick={()=>navigate(`/property/${data[currentIndex]?.propertyId._id}`)} src={data[currentIndex]?.propertyId.images[0]} alt="Carousel Image" />
+      
       </div>
       <div className="carouselDetails">
-        <h3>{data[currentIndex]?.title}</h3>
+      <h3>{data[currentIndex]?.propertyId.title}</h3>
       </div>
       <div className="userImage">
-          <img src={data[currentIndex]?.propertyId.currentOwner.img} alt="User Image" />
-          <h3>{data[currentIndex]?.propertyId.currentOwner.firstName} {data[currentIndex]?.propertyId.currentOwner.lastName}</h3>
+        
+          <img src={data[currentIndex]?.propertyId.currentOwner.img} onClick={()=>navigate(`/account/${data[currentIndex]?.propertyId.currentOwner._id}`)} alt="User Image" />
+          <h3 onClick={()=>navigate(`/account/${data[currentIndex]?.propertyId.currentOwner._id}`)}>{data[currentIndex]?.propertyId.currentOwner.firstName} {data[currentIndex]?.propertyId.currentOwner.lastName}</h3>
           
         </div>
       

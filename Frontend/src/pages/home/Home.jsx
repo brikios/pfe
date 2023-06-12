@@ -30,7 +30,7 @@ const Home = () =>{
   useEffect(()=>{
     document.title='داري - يمكنك الحصول على أفضل العروض على موقعنا'
 },[])
-const {user}=useContext(AuthContext)
+const {user,refreshToken}=useContext(AuthContext)
     const navigate=useNavigate();
     const [properties,setProperties]=useState([]);
     const [searchParams,setSearchParams]=useSearchParams();
@@ -44,7 +44,9 @@ const {user}=useContext(AuthContext)
 	}, []);
   const dataCarousel=[]
   const {data,loading,error,refresh} = useFetch('http://localhost:8800/property/getallpropeties')
-
+  useEffect(()=>{
+    refreshToken(user)
+  },[])
   useEffect(()=>{
       
       //console.log(data)

@@ -4,13 +4,14 @@ import { useState } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
     const [credentials,setCredentials]= useState({
         email:undefined,
         password:undefined,
     })
     const{loading,error,dispatch}=useContext(AuthContext)
-    const [errorMessage,setErrorMessage]=useState("")
+    const [errorm,setError]=useState("")
     const navigate = useNavigate()
     const handleChnage=(e)=>{
          setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
@@ -42,7 +43,11 @@ const Login = () => {
                     }, EXPIRE_TIME);
         }catch(err){
             dispatch({type:"LOGIN_FAILURE",payloud:err.response.data})
-            
+            if (err.response && err.response.data && err.response.data.message) {
+                setError(err.response.data.message);
+              } else {
+                setError('An error occurred. Please try again.');
+              }
         }
     }
     //console.log(user)
@@ -55,7 +60,17 @@ const Login = () => {
             <hr/>
             <span><a className='link' onClick={()=>navigate('/register')}>إنشاء حساب</a></span>
             <button onClick={handleLogin} className='container-form-button'>سجل الدخول</button>
-            {error &&<span>{error.Message}</span>}
+            {errorm && (
+        <div className="popup">
+            <div className="popup-content">
+            <span className="close" onClick={closePopup}>
+                &times;
+            </span>
+            <p className="error-message">{error}</p>
+            </div>
+            <div className="popup-overlay" onClick={closePopup} />
+        </div>
+)}
         </div>
    </div>
   )

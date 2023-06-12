@@ -51,14 +51,14 @@ const AdsPopUp = ({ setOpenPopUpAds, setShowSuccessPopUp, propertyId }) => {
           endDate: endDate,
         });
 
-        const updatedTokens = user.adsTokens - daysBetween;
+        
 
         await axios.put(`http://localhost:8800/users/updateUserAdsToken/${user._id}`, {
-        adsTokens: updatedTokens,
+        adsTokens: daysBetween-1,
       });
       refreshToken(user);
-        setShowSuccessPopUp(true);
-        setOpenPopUpAds(false);
+      setShowSuccessPopUp(true);
+      setOpenPopUpAds(false);
 
       } catch (err) {
         console.log(err);
