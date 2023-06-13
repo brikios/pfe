@@ -14,38 +14,24 @@ export const Header = ({type}) => {
   const [maxPrice ,setMaxPrice] = useState(undefined)
 
   const navigate =useNavigate()
-  const handleSearch =()=>{
-    
-    navigate("/properties",{state:{destination,propType,minPrice,maxPrice}})
-    
-  }
+  const handleSearch = () => {
+    navigate('/properties', {
+      state: { destination, propType, minPrice, maxPrice },
+    });
+  };
+ 
   
-  
+  const handleHeaderListItemClick = (propType) => {
+    setPropType(value);
+    navigate('/properties', {
+      state: { destination, propType, minPrice, maxPrice },
+    });
+  };
+
   return (
-    <div className='header'>
-      <div className={type =='properties' ? 'headerContainer propertiesMode':'headerContainer'} >
-        <div className="headerList">
-          <div className="headerListItem  active" >
-            <FontAwesomeIcon icon={faHouse} />
-            <span>منازل</span>
-            </div>
-            <div className="headerListItem">
-            <FontAwesomeIcon icon={faBuilding} />
-            <span>شقق</span>
-            </div>
-            <div className="headerListItem">
-            <FontAwesomeIcon icon={faWarehouse} />
-            <span>مستودعات</span>    
-            </div>
-            <div className="headerListItem">
-            <FontAwesomeIcon icon={faTree} />
-            <span>أراضي</span>            
-            </div>
-            <div className="headerListItem">
-            <FontAwesomeIcon icon={faStore} />
-            <span>محلات تجارية</span>            
-            </div>
-        </div>
+    <div className="header">
+      <div className={type === 'properties' ? 'headerContainer propertiesMode' : 'headerContainer'}>
+        
         { type !=='properties' &&
           <>
         <h1 className="headerTitle">نقدم لك أحسن العروض لإستئجار مرفق جيد</h1>

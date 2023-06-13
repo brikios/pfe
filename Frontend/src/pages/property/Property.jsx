@@ -38,11 +38,13 @@ const property = () =>{
     const [openPopUpAds,setOpenPopUpAds]=useState(false);
     const [userReview, setUserReview] = useState(null);
     const [hasReviewed, setHasReviewed] = useState(false);
-    const [banned,setBanned]=useState(false)
+    const [banned,setBanned]=useState([])
+  
     const handleOpenImg=(index)=>{
         setSlideNumber(index);
         setOpenImg(true);   
     }
+   
     const {data,loading,error,refresh} = useFetch(`http://localhost:8800/property/get/${propertyId}`)
     const {data2,load,err,ref} = useFetch2(`http://localhost:8800/users/get/${data.currentOwner}`)
     const {user,refreshToken}=useContext(AuthContext);
@@ -78,18 +80,29 @@ const property = () =>{
             setSlideNumber(newSlideNumber)
     }
     
+useEffect(() => {
+    let isMounted = true;
+  
+    const fetchData = async () => {
+      try {
+       
+        const response = await axios.get(`http://localhost:8800/users/get/${data?.currentOwner}`);
+        setBanned(response.data)
+        console.log(banned)
+        }catch(err){
+            console.log(err)
+        };
+        fetchData();
+        }}, [data.currentOwner]);
     useEffect(() => {
         const getReviews = async () => {
           try {
             const response = await axios.get(`http://localhost:8800/review/get/${propertyId}`);
             setRecords(response.data);
     
-            // Check if the user has already submitted a review
             const userReview = response.data.find((review) => review.user._id === user?._id);
             setUserReview(userReview);
-    
-            // Check if the user has reviewed the property
-            setHasReviewed(!!userReview);
+                setHasReviewed(!!userReview);
           } catch (err) {
             console.log(err);
           }
@@ -97,7 +110,11 @@ const property = () =>{
     
         getReviews();
       }, [propertyId, user?._id]);
-    
+      useEffect(() => {
+        if ( data2.banned) {
+          navigate('/userBanned');
+        }
+      }, [data2]);
     const handleUserState=()=>{
        (user) ? setOpenPopUp(true) : navigate('/login') 
     }
@@ -108,7 +125,7 @@ const property = () =>{
     if(user){
         sameUser = data.currentOwner==user._id ?true :false
     }
-    
+   
     const handleUserStateReview=()=>{
         if(user){
         (!sameUser) ?setOpenPopUpReview(true) : alert("you're not allowed to do that")
@@ -130,14 +147,21 @@ const property = () =>{
         })
       }
 
-      
+      useEffect(()=>{
+        if(data2.Banned){
+          navigate('/userBanned')
+        
+        }
+      })
       
     return(
         <div>
+            
             <Navbar socket={socket} />
             {useEffect(()=>{
         document.title=`${data.adress}`
     },[])}
+         
             <Header type="properties"/>
             {loading?("loading") : (
             <div className="propertyContainer">
@@ -188,7 +212,7 @@ const property = () =>{
                             <button onClick={handleUserState}>احجز الآن</button>
                         </div>}
                         
-                       
+                      
                     </div>
                     <div className="propertyDetails">
                     {sameUser ?<></>:<><a onClick={()=>handleNavigate(data2._id)}>
@@ -200,8 +224,7 @@ const property = () =>{
                     phone={data2.phone}
                     email={data2.email}
                     /></a></>}
-                    {data2.Banned & navigate('/userBanned')
-                    }
+                    
                     <div className="propertyDetailsPrice1">
                         {records.map((record,index)=>(
                            <div>

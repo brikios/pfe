@@ -64,6 +64,13 @@ const Account = () => {
           }
         },[])
 
+        useEffect(()=>{
+          if(data.Banned){
+            navigate('/userBanned')
+          
+          }
+        })
+
         const navigate=useNavigate()
         useEffect(()=>{
           document.title=`${data.firstName} ${data.lastName}`
@@ -91,8 +98,7 @@ const Account = () => {
     }
   return (
     <div>
-      {data.Banned & navigate('/userBanned')
-                    }
+     
         <Navbar />
         <div className="profile">
       <img src={data.img} alt="Profile Picture" />
