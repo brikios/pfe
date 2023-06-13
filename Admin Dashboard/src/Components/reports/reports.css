@@ -90,7 +90,9 @@
 
   
 }
-
+.buttons{
+    margin-right: 150px;
+}
 .btnproperties{
     background-color:#1b773e;
     color: #fff;
@@ -98,5 +100,6 @@
     border-radius:10px;
     padding: 10px 5px;
     cursor: pointer;
+    margin-left: 155px;
     
 }

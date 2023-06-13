@@ -65,9 +65,23 @@
 }, []);
     
     return (
-        <div><button className="btnproperties"  onClick={()=>setPropList("properties")}>تقارير الملكيات</button><br />
-        <button className="btnAccounts" onClick={()=>setPropList("user")}>تقارير الحسابات</button>
-        {propList=="properties"?<div>
+       <div>
+        <div className='buttons'>
+<button className="btnproperties" onClick={() => setPropList("properties")}>
+        تقارير الملكيات
+      </button>
+      <br />
+      <button className="btnAccounts" onClick={() => setPropList("user")}>
+        تقارير الحسابات
+      </button>       
+      </div> {propList=="properties"?<div>
+        <button className="btnproperties" onClick={() => setPropList("properties")}>
+        تقارير الملكيات
+      </button>
+      <br />
+      <button className="btnAccounts" onClick={() => setPropList("user")}>
+        تقارير الحسابات
+      </button>
             <table className="styled-table">
                 <tr>
                     <td>

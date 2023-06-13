@@ -42,7 +42,7 @@ const EditeAccount = ({setOpenEditAccountPopUp,currenUser}) => {
           if (lastName !== '') {
             updatedData.lastName = lastName;
           }
-          if (phone !== '') {
+          if (phone !== null) {
             updatedData.phone = phone;
           }
           if (links[0] !== '') {

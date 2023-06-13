@@ -70,9 +70,9 @@ export const loginUser = async (req,res,next)=>{
         })
     
         if (!user) {
-            return { status: 'error', error: 'Invalid login' }
+            res.status(500).json({message: 'there is no user'} )
         }
-    
+
         const isPasswordValid = await bcrypt.compare(
             req.body.password,
             user.password
@@ -92,8 +92,8 @@ export const loginUser = async (req,res,next)=>{
         } else {
             return res.json({ status: 'error', token: false })
         }
-    }catch(error){
-        return next(createError(404, 'البريد الإلكتروني أو كلمة السر غير صحيحان'));
+        }catch(error){
+        return res.json({message: 'البريد الإلكتروني أو كلمة السر غير صحيح'});
     }
 }
 
